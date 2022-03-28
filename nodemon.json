@@ -1,4 +1,5 @@
 {
+  "delay": 2000,
   "watch": ["src/", "package-lock.json", "package.json"],
   "ext": "ts,json"
 }
