@@ -4,6 +4,7 @@ import PdfRequestBodySchema from "./schemas/pdf_request_body.json";
 import { PdfOptions, PdfRequestBody } from "./types/schemas";
 
 const SERVER_PORT = process.env["SERVER_PORT"] ?? 8000;
+const SERVER_ADDRESS = process.env["SERVER_ADDRESS"] ?? "localhost";
 
 const server = fastify({
   logger: {
@@ -58,7 +59,7 @@ server.get("/health", async (_, response) => response.code(200).send());
 
 const startServer = async () => {
   try {
-    await server.listen(+SERVER_PORT);
+    await server.listen(+SERVER_PORT, SERVER_ADDRESS);
   } catch (error) {
     console.error(error);
     process.exit(1);
