@@ -1,5 +1,13 @@
 # bits-to-dead-trees
 
+## 0.0.5
+
+### Patch Changes
+
+- fae9c4e: Another try to get automatic Docker builds running
+- ea597c1: More pipeline fixes (at least I hope so)
+- c323966: Move docker build into own job
+
 ## 0.0.4
 
 ### Patch Changes
