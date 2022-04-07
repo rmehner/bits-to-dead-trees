@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 0.0.6
+
+### Patch Changes
+
+- 7a28fc8: Last attempt to fix the docker pipeline for today
+
 ## 0.0.5
 
 ### Patch Changes
