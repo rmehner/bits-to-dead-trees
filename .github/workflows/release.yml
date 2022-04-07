@@ -43,7 +43,8 @@ jobs:
 
       - name: Checkout Repo
         uses: actions/checkout@v3
-        ref: "v${{ env.VERSION }}"
+        with:
+          ref: v${{ env.VERSION }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
