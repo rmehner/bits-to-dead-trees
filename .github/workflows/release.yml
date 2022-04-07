@@ -46,7 +46,7 @@ jobs:
 
       - name: Determine version
         run: |
-          echo "VERSION=$(cat package.json | jq .version}" >> $GITHUB_ENV
+          echo "VERSION=$(cat package.json | jq .version)" >> $GITHUB_ENV
 
       - name: Checkout tag
         run: |
