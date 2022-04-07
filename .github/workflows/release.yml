@@ -40,7 +40,11 @@ jobs:
     name: Build and push docker image
     runs-on: ubuntu-latest
     needs: ["release"]
-    # if: needs.release.changesets.outputs.published == 'true'
+    # https://github.com/actions/runner/issues/491#issuecomment-850884422 ¯\_(ツ)_/¯
+    iff: |
+      always() &&
+      needs.release.result == 'success' &&
+      needs.release.changesets.outputs.published == 'true'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
