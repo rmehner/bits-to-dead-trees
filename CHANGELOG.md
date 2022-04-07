@@ -1,5 +1,12 @@
 # bits-to-dead-trees
 
+## 0.0.8
+
+### Patch Changes
+
+- 67dc4a4: Manual release process for now
+- e37239b: Add repository to package.json
+
 ## 0.0.7
 
 ### Patch Changes
