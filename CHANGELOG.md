@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 0.0.7
+
+### Patch Changes
+
+- e272ea9: 🤡
+
 ## 0.0.6
 
 ### Patch Changes
