@@ -21,7 +21,8 @@
     "start": "node dist/index.js",
     "start:dev": "concurrently --kill-others \"npm run build -- --watch\" \"nodemon --inspect dist/index.js\" ",
     "dump-schemas": "typescript-json-schema src/types/schemas.ts PdfRequestBody --out src/schemas/pdf_request_body.json",
-    "update-schemas": "npm run dump-schemas && npm run format"
+    "update-schemas": "npm run dump-schemas && npm run format",
+    "postinstall": "npx playwright install chromium"
   },
   "dependencies": {
     "fastify": "^3.28.0",

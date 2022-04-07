@@ -13,13 +13,13 @@ RUN apt-get update -yqq && \
 
 COPY ["package.json", "package-lock.json*", "tsconfig.json", "./"]
 
-RUN npm install --production=false
+RUN npm install --production=false --ignore-scripts
 
 COPY src src
 
 RUN npm run build && \
   rm -Rf src && \
-  npm install --production
+  npm install --production --ignore-scripts
 
 ENTRYPOINT ["tini", "-v", "--"]
 CMD ["node", "dist/index.js"]
