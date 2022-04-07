@@ -31,12 +31,12 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: npm run release
+          title: Release new version 🚀
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create docker image
-        id: determineVersion
         if: steps.changesets.outputs.published == 'true'
         run: |
           echo "VERSION=$(cat package.json | jq .version}" >> $GITHUB_ENV
