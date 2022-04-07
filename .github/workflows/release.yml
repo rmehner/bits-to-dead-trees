@@ -43,8 +43,9 @@ jobs:
 
       - name: Checkout Repo
         uses: actions/checkout@v3
-        with:
-          ref: v${{ env.VERSION }}
+        run: |
+          git fetch --prune --unshallow --tags
+          git checkout v${{ env.VERSION }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
