@@ -1,5 +1,12 @@
 # bits-to-dead-trees
 
+## 0.0.9
+
+### Patch Changes
+
+- ddb70f5: Update eslint
+- 5176013: Add CI setup
+
 ## 0.0.8
 
 ### Patch Changes
