@@ -15,6 +15,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
+    "check-format": "prettier --check 'src/**/*.ts'",
     "clean": "rimraf dist",
     "lint": "eslint src/*.ts",
     "format": "prettier --write src/**/*.{ts,json}",
