@@ -5,6 +5,8 @@
 Exposes a web server with a single endpoint to take in a URL and create a PDF out
 of that. It's using [Playwright](https://playwright.dev) in the background for this.
 
+[![Depfu](https://badges.depfu.com/badges/74bd86ac2a33c6c6f6817cafc6419e84/overview.svg)](https://depfu.com/github/rmehner/bits-to-dead-trees?project_id=35056)
+
 ## Setup
 
 ### Requirements
