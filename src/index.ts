@@ -22,7 +22,8 @@ const createPDF = async (url: string, options?: PdfOptions) => {
   const browser = await playwright.chromium.launch();
   const context = await browser.newContext({ ignoreHTTPSErrors: true });
   const page = await context.newPage();
-  await page.goto(url);
+  await page.goto(url, { timeout: 60000 });
+  await page.waitForLoadState("networkidle");
 
   const pdf = await page.pdf(options);
   await browser.close();
