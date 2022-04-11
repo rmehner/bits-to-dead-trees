@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 0.0.10
+
+### Patch Changes
+
+- df332b7: Go back to automatic release, but use PAT
+
 ## 0.0.9
 
 ### Patch Changes
