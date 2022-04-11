@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 0.0.11
+
+### Patch Changes
+
+- a3c12a4: Wait for network idle event before creating pdf
+
 ## 0.0.10
 
 ### Patch Changes
