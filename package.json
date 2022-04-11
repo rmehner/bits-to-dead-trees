@@ -26,8 +26,7 @@
     "update-schemas": "npm run dump-schemas && npm run format",
     "postinstall": "npx playwright install chromium",
     "add-changeset": "changeset",
-    "release": "changeset publish",
-    "version": "changeset version"
+    "release": "changeset publish"
   },
   "dependencies": {
     "fastify": "^3.28.0",
