@@ -41,3 +41,17 @@ The server exposes the `/pdf` endpoint that listens to a POST request and expect
 `options` are the options Playwright knows about PDF: https://playwright.dev/docs/api/class-page#page-pdf. We pass them to Playwright directly, so please refer to their docs.
 
 The response is the PDF file.
+
+## Docker
+
+Versions are automatically build as Docker images and are available on [GitHub's package registry](https://github.com/rmehner/bits-to-dead-trees/pkgs/container/bits-to-dead-trees)
+
+If you want to use it internally with docker-compose, this should give you a good idea to start:
+
+```yml
+services:
+  pdf:
+    image: ghcr.io/rmehner/bits-to-dead-trees:v1.0.0
+    ports:
+      - 8000:8000
+```
