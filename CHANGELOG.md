@@ -1,5 +1,22 @@
 # bits-to-dead-trees
 
+## 1.0.0
+
+### Major Changes
+
+- eccf614: Remove TypeScript, use vanilla JS with JSDoc types.
+
+  This actually improves DX by not having that extra build step, while still having
+  good support in your IDE, since we still have the types as JSDoc.
+
+  This is the v1.0. This has been very stable and it's unlikely that the API will change
+  a lot. Nothing should break for users with this release.
+
+### Patch Changes
+
+- 7ef95e5: Update playwright to 1.21.1
+- d651f7a: Update playwright to 1.21.0
+
 ## 0.0.11
 
 ### Patch Changes
