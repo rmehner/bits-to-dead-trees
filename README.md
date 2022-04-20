@@ -19,8 +19,7 @@ of that. It's using [Playwright](https://playwright.dev) in the background for t
 1. `git checkout https://github.com/rmehner/bits-to-dead-trees`
 2. `cd bits-to-dead-trees`
 3. `npm install`
-4. `npm run build` to build the app
-5. `npm start` to start the server. It'll listen to port 8000 on localhost by default.
+4. `npm start` to start the server. It'll listen to port 8000 on localhost by default.
 
 ### Development
 

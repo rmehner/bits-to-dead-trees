@@ -1,5 +1,4 @@
 {
-  "delay": 2000,
-  "watch": ["src/", "package-lock.json", "package.json"],
-  "ext": "ts,json"
+  "watch": ["index.js", "schemas/pdf_request_body.json", "package-lock.json"],
+  "ext": "js,json"
 }

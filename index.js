@@ -1,7 +1,18 @@
-import fastify from "fastify";
-import playwright from "playwright-core";
-import PdfRequestBodySchema from "./schemas/pdf_request_body.json";
-import { PdfOptions, PdfRequestBody } from "./types/schemas";
+// @ts-check
+
+/**
+ * @typedef {Parameters<import("playwright-core").Page["pdf"]>[0]} PdfOptions
+ */
+
+/**
+ * @typedef {Object} PdfRequestBody
+ * @property {string} url
+ * @property {PdfOptions} options
+ */
+
+const { fastify } = require("fastify");
+const playwright = require("playwright-core");
+const PdfRequestBodySchema = require("./schemas/pdf_request_body.json");
 
 const SERVER_PORT = process.env["SERVER_PORT"] ?? 8000;
 const SERVER_ADDRESS = process.env["SERVER_ADDRESS"] ?? "localhost";
@@ -18,7 +29,13 @@ const server = fastify({
   },
 });
 
-const createPDF = async (url: string, options?: PdfOptions) => {
+/**
+ *
+ * @param {string} url
+ * @param {PdfOptions} options
+ * @returns Buffer
+ */
+const createPDF = async (url, options = {}) => {
   const browser = await playwright.chromium.launch();
   const context = await browser.newContext({ ignoreHTTPSErrors: true });
   const page = await context.newPage();
@@ -31,9 +48,14 @@ const createPDF = async (url: string, options?: PdfOptions) => {
   return pdf;
 };
 
-server.post<{ Body: PdfRequestBody }>(
+server.post(
   "/pdf",
   { schema: { body: PdfRequestBodySchema }, attachValidation: true },
+  /**
+   *
+   * @param {import('fastify').FastifyRequest<{Body: PdfRequestBody}>} request
+   * @param {import('fastify').FastifyReply} response
+   */
   async (request, response) => {
     if (request.validationError) {
       response.code(400);

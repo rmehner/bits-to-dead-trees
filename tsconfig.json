@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
-    "target": "ES2021",
-    "lib": ["ES2021", "DOM"],
-    "module": "CommonJS",
-    "rootDir": "./src",
+    "lib": ["es2021"],
+
+    "strict": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "esModuleInterop": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true
-  },
-  "files": ["./src/index.ts"]
+    "resolveJsonModule": true,
+
+    "checkJs": true
+  }
 }

@@ -11,15 +11,11 @@ RUN apt-get update -yqq && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ["package.json", "package-lock.json*", "tsconfig.json", "./"]
+COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install --production=false --ignore-scripts
+RUN npm install --production --ignore-scripts
 
-COPY src src
-
-RUN npm run build && \
-  rm -Rf src && \
-  npm install --production --ignore-scripts
+COPY ["index.js", "schemas", "./"]
 
 ENTRYPOINT ["tini", "-v", "--"]
-CMD ["node", "dist/index.js"]
+CMD ["node", "index.js"]
