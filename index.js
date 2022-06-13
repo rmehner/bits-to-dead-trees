@@ -82,7 +82,7 @@ server.get("/health", async (_, response) => response.code(200).send());
 
 const startServer = async () => {
   try {
-    await server.listen(+SERVER_PORT, SERVER_ADDRESS);
+    await server.listen({ port: +SERVER_PORT, host: SERVER_ADDRESS });
   } catch (error) {
     console.error(error);
     process.exit(1);
