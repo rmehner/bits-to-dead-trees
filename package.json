@@ -28,7 +28,7 @@
     "ts-check": "npx tsc --noEmit"
   },
   "dependencies": {
-    "fastify": "^4.0.1",
+    "fastify": "^4.0.3",
     "playwright-core": "^1.22.2"
   },
   "devDependencies": {
