@@ -35,7 +35,7 @@
     "@changesets/cli": "^2.23.0",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
-    "nodemon": "^2.0.18",
+    "nodemon": "^2.0.19",
     "pino-pretty": "^8.1.0",
     "prettier": "^2.7.1",
     "typescript-json-schema": "^0.53.1"
