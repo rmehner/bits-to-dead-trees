@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.0.1
+
+### Patch Changes
+
+- cd71c2f: Update playwright to 1.23.2 (new browser versions)
+
 ## 1.0.0
 
 ### Major Changes
