@@ -1,5 +1,12 @@
 # bits-to-dead-trees
 
+## 1.0.2
+
+### Patch Changes
+
+- 86a275d: Fix server crash due to missing schema
+- 029ce39: Fix server crash due to pretty print on development
+
 ## 1.0.1
 
 ### Patch Changes
