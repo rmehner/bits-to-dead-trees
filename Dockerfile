@@ -13,7 +13,7 @@ RUN apt-get update -yqq && \
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install --production --ignore-scripts
+RUN npm install --omit=dev --ignore-scripts
 
 COPY ["index.js", "schemas", "./"]
 
