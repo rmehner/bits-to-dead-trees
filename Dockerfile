@@ -15,7 +15,7 @@ COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install --omit=dev --ignore-scripts
 
-COPY ["index.js", "schemas", "./"]
+COPY ["index.js", "pdf_request_body.json", "./"]
 
 ENTRYPOINT ["tini", "-v", "--"]
 CMD ["node", "index.js"]

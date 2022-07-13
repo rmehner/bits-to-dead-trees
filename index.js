@@ -12,7 +12,7 @@
 
 const { fastify } = require("fastify");
 const playwright = require("playwright-core");
-const PdfRequestBodySchema = require("./schemas/pdf_request_body.json");
+const PdfRequestBodySchema = require("./pdf_request_body.json");
 
 const SERVER_PORT = process.env["SERVER_PORT"] ?? 8000;
 const SERVER_ADDRESS = process.env["SERVER_ADDRESS"] ?? "localhost";
