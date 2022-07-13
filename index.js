@@ -19,13 +19,16 @@ const SERVER_ADDRESS = process.env["SERVER_ADDRESS"] ?? "localhost";
 
 const server = fastify({
   logger: {
-    prettyPrint:
+    transport:
       process.env["NODE_ENV"] !== "production"
         ? {
-            translateTime: "HH:MM:ss Z",
-            ignore: "pid,hostname",
+            target: "pino-pretty",
+            options: {
+              translateTime: "HH:MM:ss Z",
+              ignore: "pid,hostname",
+            },
           }
-        : false,
+        : undefined,
   },
 });
 
