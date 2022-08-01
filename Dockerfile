@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.23.4-focal
+FROM mcr.microsoft.com/playwright:v1.24.2-focal
 
 ENV NODE_ENV=production
 ENV SERVER_PORT=8000
