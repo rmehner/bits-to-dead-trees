@@ -1,5 +1,15 @@
 # bits-to-dead-trees
 
+## 1.1.0
+
+### Minor Changes
+
+- aa60fb0: Upgrade to Ubuntu Jammy instead of Focal
+
+### Patch Changes
+
+- a8bd6fa: Update to Playwright 1.25.0 (new browser versions again!)
+
 ## 1.0.2
 
 ### Patch Changes
