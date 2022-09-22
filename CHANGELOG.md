@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.2.0
+
+### Minor Changes
+
+- 58d1ddc: Update to Playwright 1.26.0 (new major browser versions)
+
 ## 1.1.1
 
 ### Patch Changes
