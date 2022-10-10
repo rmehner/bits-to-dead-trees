@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.3.0
+
+### Minor Changes
+
+- 1d9b58f: Update to Playwright 1.27.0
+
 ## 1.2.1
 
 ### Patch Changes
