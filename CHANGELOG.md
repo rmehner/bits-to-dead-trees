@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.4.1
+
+### Patch Changes
+
+- b56a29c: Update fastify to 4.10.2 to mitigate [security bug](https://github.com/fastify/fastify/security/advisories/GHSA-3fjj-p79j-c9hh)
+
 ## 1.4.0
 
 ### Minor Changes
