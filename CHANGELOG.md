@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.4.2
+
+### Patch Changes
+
+- 1a0f800: Upgrade Playwright to 1.28.1
+
 ## 1.4.1
 
 ### Patch Changes
