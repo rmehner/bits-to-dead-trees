@@ -32,12 +32,12 @@
     "playwright-core": "^1.29.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
-    "eslint": "^8.29.0",
+    "@changesets/cli": "^2.26.0",
+    "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.20",
     "pino-pretty": "^9.1.1",
-    "prettier": "^2.8.0",
+    "prettier": "^2.8.1",
     "tslib": "^2.4.1",
     "typescript-json-schema": "^0.55.0"
   }
