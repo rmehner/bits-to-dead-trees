@@ -16,7 +16,7 @@
           "type": "string"
         },
         "headerTemplate": {
-          "description": "HTML template for the print header. Should be valid HTML markup with following classes used to inject printing values\ninto them:\n- `'date'` formatted print date\n- `'title'` document title\n- `'url'` document location\n- `'pageNumber'` current page number\n- `'totalPages'` total pages in the document",
+          "description": "HTML template for the print header. Should be valid HTML markup with following classes used to inject printing\nvalues into them:\n- `'date'` formatted print date\n- `'title'` document title\n- `'url'` document location\n- `'pageNumber'` current page number\n- `'totalPages'` total pages in the document",
           "type": "string"
         },
         "height": {
