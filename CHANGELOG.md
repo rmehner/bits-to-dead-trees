@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 1.5.1
+
+### Patch Changes
+
+- fcfa9be: Update to Playwright 1.29.2
+
 ## 1.5.0
 
 ### Minor Changes
