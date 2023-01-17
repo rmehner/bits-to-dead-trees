@@ -20,7 +20,7 @@
     "format": "prettier --write **/*.{js,ts,json,md}",
     "start": "node index.js",
     "start:dev": "nodemon --inspect index.js",
-    "dump-schemas": "typescript-json-schema types/schemas.ts PdfRequestBody --out pdf_request_body.json && npm run format",
+    "dump-schemas": "typescript-json-schema types/schemas.ts PdfRequestBody --out pdf_request_body.json",
     "update-schemas": "npm run dump-schemas && npm run format",
     "postinstall": "npx playwright install chromium",
     "add-changeset": "changeset",
