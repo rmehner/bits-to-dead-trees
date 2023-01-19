@@ -55,10 +55,14 @@ const createPDF = async (
     const context = await browser.newContext(browserContextOptions);
     const page = await context.newPage();
 
-    await page.goto(url, gotoOptions);
-
-    const pdf = await page.pdf(pdfOptions);
-    return pdf;
+    const response = await page.goto(url, gotoOptions);
+    if (response?.ok()) {
+      const pdf = await page.pdf(pdfOptions);
+      return pdf;
+    }
+    throw new Error(
+      `Request returned ${response?.status()}. Did not create PDF.`
+    );
   } finally {
     await browser.close();
   }
