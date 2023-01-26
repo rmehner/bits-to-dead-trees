@@ -3,7 +3,13 @@
 import { fastify } from "fastify";
 import { chromium } from "playwright-core";
 import lodash from "lodash";
-import PdfRequestBodySchema from "./pdf_request_body.json" assert { type: "json" };
+import { readFileSync } from "node:fs";
+
+// we'd love to do this, but eslint doesn't like import assertions yet
+// import PdfRequestBodySchema from "./pdf_request_body.json" assert { type: "json" };
+const PdfRequestBodySchema = JSON.parse(
+  readFileSync("./pdf_request_body.json", { encoding: "utf-8" })
+);
 
 const { isEmpty } = lodash;
 
