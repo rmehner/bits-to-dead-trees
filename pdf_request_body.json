@@ -1,84 +1,581 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "properties": {
-    "options": {
+  "additionalProperties": false,
+  "definitions": {
+    "BrowserContextOptions": {
+      "additionalProperties": false,
       "properties": {
-        "displayHeaderFooter": {
-          "description": "Display header and footer. Defaults to `false`.",
+        "acceptDownloads": {
+          "description": "Whether to automatically download all the attachments. Defaults to `true` where all the downloads are accepted.",
           "type": "boolean"
         },
-        "footerTemplate": {
-          "description": "HTML template for the print footer. Should use the same format as the `headerTemplate`.",
+        "baseURL": {
+          "description": "When using [page.goto(url[, options])](https://playwright.dev/docs/api/class-page#page-goto),\n[page.route(url, handler[, options])](https://playwright.dev/docs/api/class-page#page-route),\n[page.waitForURL(url[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-url),\n[page.waitForRequest(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-request),\nor\n[page.waitForResponse(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-response)\nit takes the base URL in consideration by using the\n[`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor for building the corresponding URL.\nExamples:\n- baseURL: `http://localhost:3000` and navigating to `/bar.html` results in `http://localhost:3000/bar.html`\n- baseURL: `http://localhost:3000/foo/` and navigating to `./bar.html` results in\n  `http://localhost:3000/foo/bar.html`\n- baseURL: `http://localhost:3000/foo` (without trailing slash) and navigating to `./bar.html` results in\n  `http://localhost:3000/bar.html`",
           "type": "string"
         },
-        "format": {
-          "description": "Paper format. If set, takes priority over `width` or `height` options. Defaults to 'Letter'.",
-          "type": "string"
-        },
-        "headerTemplate": {
-          "description": "HTML template for the print header. Should be valid HTML markup with following classes used to inject printing\nvalues into them:\n- `'date'` formatted print date\n- `'title'` document title\n- `'url'` document location\n- `'pageNumber'` current page number\n- `'totalPages'` total pages in the document",
-          "type": "string"
-        },
-        "height": {
-          "description": "Paper height, accepts values labeled with units.",
-          "type": ["string", "number"]
-        },
-        "landscape": {
-          "description": "Paper orientation. Defaults to `false`.",
+        "bypassCSP": {
+          "description": "Toggles bypassing page's Content-Security-Policy.",
           "type": "boolean"
         },
-        "margin": {
-          "description": "Paper margins, defaults to none.",
+        "colorScheme": {
+          "anyOf": [
+            {
+              "enum": ["dark", "light", "no-preference"],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Emulates `'prefers-colors-scheme'` media feature, supported values are `'light'`, `'dark'`, `'no-preference'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'light'`."
+        },
+        "deviceScaleFactor": {
+          "description": "Specify device scale factor (can be thought of as dpr). Defaults to `1`.",
+          "type": "number"
+        },
+        "extraHTTPHeaders": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "An object containing additional HTTP headers to be sent with every request.",
+          "type": "object"
+        },
+        "forcedColors": {
+          "anyOf": [
+            {
+              "enum": ["active", "none"],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Emulates `'forced-colors'` media feature, supported values are `'active'`, `'none'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'none'`."
+        },
+        "geolocation": {
+          "$ref": "#/definitions/Geolocation"
+        },
+        "hasTouch": {
+          "description": "Specifies if viewport supports touch events. Defaults to false.",
+          "type": "boolean"
+        },
+        "httpCredentials": {
+          "$ref": "#/definitions/HTTPCredentials",
+          "description": "Credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)."
+        },
+        "ignoreHTTPSErrors": {
+          "description": "Whether to ignore HTTPS errors when sending network requests. Defaults to `false`.",
+          "type": "boolean"
+        },
+        "isMobile": {
+          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. Defaults to `false`. Not\nsupported in Firefox.",
+          "type": "boolean"
+        },
+        "javaScriptEnabled": {
+          "description": "Whether or not to enable JavaScript in the context. Defaults to `true`.",
+          "type": "boolean"
+        },
+        "locale": {
+          "description": "Specify user locale, for example `en-GB`, `de-DE`, etc. Locale will affect `navigator.language` value,\n`Accept-Language` request header value as well as number and date formatting rules.",
+          "type": "string"
+        },
+        "logger": {
+          "$ref": "#/definitions/Logger",
+          "description": "Logger sink for Playwright logging."
+        },
+        "offline": {
+          "description": "Whether to emulate network being offline. Defaults to `false`.",
+          "type": "boolean"
+        },
+        "permissions": {
+          "description": "A list of permissions to grant to all pages in this context. See\n[browserContext.grantPermissions(permissions[, options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-grant-permissions)\nfor more details.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "proxy": {
+          "additionalProperties": false,
+          "description": "Network proxy settings to use with this context.\n\n**NOTE** For Chromium on Windows the browser needs to be launched with the global proxy for this option to work. If\nall contexts override the proxy, global proxy will be never used and can be any string, for example `launch({\nproxy: { server: 'http://per-context' } })`.",
           "properties": {
-            "bottom": {
-              "description": "Bottom margin, accepts values labeled with units. Defaults to `0`.",
+            "bypass": {
+              "description": "Optional comma-separated domains to bypass proxy, for example `\".com, chromium.org, .domain.com\"`.",
+              "type": "string"
+            },
+            "password": {
+              "description": "Optional password to use if HTTP proxy requires authentication.",
+              "type": "string"
+            },
+            "server": {
+              "description": "Proxy to be used for all requests. HTTP and SOCKS proxies are supported, for example `http://myproxy.com:3128` or\n`socks5://myproxy.com:3128`. Short form `myproxy.com:3128` is considered an HTTP proxy.",
+              "type": "string"
+            },
+            "username": {
+              "description": "Optional username to use if HTTP proxy requires authentication.",
+              "type": "string"
+            }
+          },
+          "required": ["server"],
+          "type": "object"
+        },
+        "recordHar": {
+          "additionalProperties": false,
+          "description": "Enables [HAR](http://www.softwareishard.com/blog/har-12-spec) recording for all pages into `recordHar.path` file.\nIf not specified, the HAR is not recorded. Make sure to await\n[browserContext.close()](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for the HAR to\nbe saved.",
+          "properties": {
+            "content": {
+              "description": "Optional setting to control resource content management. If `omit` is specified, content is not persisted. If\n`attach` is specified, resources are persisted as separate files or entries in the ZIP archive. If `embed` is\nspecified, content is stored inline the HAR file as per HAR specification. Defaults to `attach` for `.zip` output\nfiles and to `embed` for all other file extensions.",
+              "enum": ["attach", "embed", "omit"],
+              "type": "string"
+            },
+            "mode": {
+              "description": "When set to `minimal`, only record information necessary for routing from HAR. This omits sizes, timing, page,\ncookies, security and other types of HAR information that are not used when replaying from HAR. Defaults to `full`.",
+              "enum": ["full", "minimal"],
+              "type": "string"
+            },
+            "omitContent": {
+              "description": "Optional setting to control whether to omit request content from the HAR. Defaults to `false`. Deprecated, use\n`content` policy instead.",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Path on the filesystem to write the HAR file to. If the file name ends with `.zip`, `content: 'attach'` is used by\ndefault.",
+              "type": "string"
+            },
+            "urlFilter": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/RegExp"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "description": "A glob or regex pattern to filter requests that are stored in the HAR. When a `baseURL` via the context options was\nprovided and the passed URL is a path, it gets merged via the\n[`new URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor."
+            }
+          },
+          "required": ["path"],
+          "type": "object"
+        },
+        "recordVideo": {
+          "additionalProperties": false,
+          "description": "Enables video recording for all pages into `recordVideo.dir` directory. If not specified videos are not recorded.\nMake sure to await\n[browserContext.close()](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for videos to\nbe saved.",
+          "properties": {
+            "dir": {
+              "description": "Path to the directory to put videos into.",
+              "type": "string"
+            },
+            "size": {
+              "additionalProperties": false,
+              "description": "Optional dimensions of the recorded videos. If not specified the size will be equal to `viewport` scaled down to\nfit into 800x800. If `viewport` is not configured explicitly the video size defaults to 800x450. Actual picture of\neach page will be scaled down if necessary to fit the specified size.",
+              "properties": {
+                "height": {
+                  "description": "Video frame height.",
+                  "type": "number"
+                },
+                "width": {
+                  "description": "Video frame width.",
+                  "type": "number"
+                }
+              },
+              "required": ["height", "width"],
+              "type": "object"
+            }
+          },
+          "required": ["dir"],
+          "type": "object"
+        },
+        "reducedMotion": {
+          "anyOf": [
+            {
+              "enum": ["no-preference", "reduce"],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Emulates `'prefers-reduced-motion'` media feature, supported values are `'reduce'`, `'no-preference'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'no-preference'`."
+        },
+        "screen": {
+          "additionalProperties": false,
+          "description": "Emulates consistent window screen size available inside web page via `window.screen`. Is only used when the\n`viewport` is set.",
+          "properties": {
+            "height": {
+              "description": "page height in pixels.",
+              "type": "number"
+            },
+            "width": {
+              "description": "page width in pixels.",
+              "type": "number"
+            }
+          },
+          "required": ["height", "width"],
+          "type": "object"
+        },
+        "serviceWorkers": {
+          "description": "Whether to allow sites to register Service workers. Defaults to `'allow'`.\n- `'allow'`: [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) can be\n  registered.\n- `'block'`: Playwright will block all registration of Service Workers.",
+          "enum": ["allow", "block"],
+          "type": "string"
+        },
+        "storageState": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "cookies": {
+                  "description": "cookies to set for context",
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "domain": {
+                        "description": "domain and path are required",
+                        "type": "string"
+                      },
+                      "expires": {
+                        "description": "Unix time in seconds.",
+                        "type": "number"
+                      },
+                      "httpOnly": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "path": {
+                        "description": "domain and path are required",
+                        "type": "string"
+                      },
+                      "sameSite": {
+                        "description": "sameSite flag",
+                        "enum": ["Lax", "None", "Strict"],
+                        "type": "string"
+                      },
+                      "secure": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "domain",
+                      "expires",
+                      "httpOnly",
+                      "name",
+                      "path",
+                      "sameSite",
+                      "secure",
+                      "value"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "origins": {
+                  "description": "localStorage to set for context",
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "localStorage": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["name", "value"],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "origin": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["localStorage", "origin"],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": ["cookies", "origins"],
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "Populates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state).\nEither a path to the file with saved storage, or an object with the following fields:"
+        },
+        "strictSelectors": {
+          "description": "If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on\nselectors that imply single target DOM element will throw when more than one element matches the selector. This\noption does not affect any Locator APIs (Locators are always strict). See [Locator] to learn more about the strict\nmode.",
+          "type": "boolean"
+        },
+        "timezoneId": {
+          "description": "Changes the timezone of the context. See\n[ICU's metaZones.txt](https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1)\nfor a list of supported timezone IDs.",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "Specific user agent to use in this context.",
+          "type": "string"
+        },
+        "videoSize": {
+          "additionalProperties": false,
+          "properties": {
+            "height": {
+              "description": "Video frame height.",
+              "type": "number"
+            },
+            "width": {
+              "description": "Video frame width.",
+              "type": "number"
+            }
+          },
+          "required": ["height", "width"],
+          "type": "object"
+        },
+        "videosPath": {
+          "type": "string"
+        },
+        "viewport": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ViewportSize"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Emulates consistent viewport for each page. Defaults to an 1280x720 viewport. `null` disables the default viewport."
+        }
+      },
+      "type": "object"
+    },
+    "Geolocation": {
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "description": "Non-negative accuracy value. Defaults to `0`.",
+          "type": "number"
+        },
+        "latitude": {
+          "description": "Latitude between -90 and 90.",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "Longitude between -180 and 180.",
+          "type": "number"
+        }
+      },
+      "required": ["latitude", "longitude"],
+      "type": "object"
+    },
+    "HTTPCredentials": {
+      "additionalProperties": false,
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": ["password", "username"],
+      "type": "object"
+    },
+    "Logger": {
+      "additionalProperties": false,
+      "description": "Playwright generates a lot of logs and they are accessible via the pluggable logger sink.\n\n```js\nconst { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.\n\n(async () => {\n  const browser = await chromium.launch({\n    logger: {\n      isEnabled: (name, severity) => name === 'browser',\n      log: (name, severity, message, args) => console.log(`${name} ${message}`)\n    }\n  });\n  ...\n})();\n```",
+      "type": "object"
+    },
+    "RegExp": {
+      "additionalProperties": false,
+      "properties": {
+        "dotAll": {
+          "type": "boolean"
+        },
+        "flags": {
+          "type": "string"
+        },
+        "global": {
+          "type": "boolean"
+        },
+        "ignoreCase": {
+          "type": "boolean"
+        },
+        "lastIndex": {
+          "type": "number"
+        },
+        "multiline": {
+          "type": "boolean"
+        },
+        "source": {
+          "type": "string"
+        },
+        "sticky": {
+          "type": "boolean"
+        },
+        "unicode": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dotAll",
+        "flags",
+        "global",
+        "ignoreCase",
+        "lastIndex",
+        "multiline",
+        "source",
+        "sticky",
+        "unicode"
+      ],
+      "type": "object"
+    },
+    "ViewportSize": {
+      "additionalProperties": false,
+      "properties": {
+        "height": {
+          "description": "page height in pixels.",
+          "type": "number"
+        },
+        "width": {
+          "description": "page width in pixels.",
+          "type": "number"
+        }
+      },
+      "required": ["height", "width"],
+      "type": "object"
+    }
+  },
+  "properties": {
+    "browserContextOptions": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BrowserContextOptions"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gotoOptions": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "referer": {
+              "description": "Referer header value. If provided it will take preference over the referer header value set by\n[page.setExtraHTTPHeaders(headers)](https://playwright.dev/docs/api/class-page#page-set-extra-http-headers).",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "Maximum operation time in milliseconds, defaults to 30 seconds, pass `0` to disable timeout. The default value can\nbe changed by using the\n[browserContext.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-navigation-timeout),\n[browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout),\n[page.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-navigation-timeout)\nor [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.",
+              "type": "number"
+            },
+            "waitUntil": {
+              "description": "When to consider operation succeeded, defaults to `load`. Events can be either:\n- `'domcontentloaded'` - consider operation to be finished when the `DOMContentLoaded` event is fired.\n- `'load'` - consider operation to be finished when the `load` event is fired.\n- `'networkidle'` - consider operation to be finished when there are no network connections for at least `500`\n  ms.\n- `'commit'` - consider operation to be finished when network response is received and the document started\n  loading.",
+              "enum": ["commit", "domcontentloaded", "load", "networkidle"],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pdfOptions": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "displayHeaderFooter": {
+              "description": "Display header and footer. Defaults to `false`.",
+              "type": "boolean"
+            },
+            "footerTemplate": {
+              "description": "HTML template for the print footer. Should use the same format as the `headerTemplate`.",
+              "type": "string"
+            },
+            "format": {
+              "description": "Paper format. If set, takes priority over `width` or `height` options. Defaults to 'Letter'.",
+              "type": "string"
+            },
+            "headerTemplate": {
+              "description": "HTML template for the print header. Should be valid HTML markup with following classes used to inject printing\nvalues into them:\n- `'date'` formatted print date\n- `'title'` document title\n- `'url'` document location\n- `'pageNumber'` current page number\n- `'totalPages'` total pages in the document",
+              "type": "string"
+            },
+            "height": {
+              "description": "Paper height, accepts values labeled with units.",
               "type": ["string", "number"]
             },
-            "left": {
-              "description": "Left margin, accepts values labeled with units. Defaults to `0`.",
-              "type": ["string", "number"]
+            "landscape": {
+              "description": "Paper orientation. Defaults to `false`.",
+              "type": "boolean"
             },
-            "right": {
-              "description": "Right margin, accepts values labeled with units. Defaults to `0`.",
-              "type": ["string", "number"]
+            "margin": {
+              "additionalProperties": false,
+              "description": "Paper margins, defaults to none.",
+              "properties": {
+                "bottom": {
+                  "description": "Bottom margin, accepts values labeled with units. Defaults to `0`.",
+                  "type": ["string", "number"]
+                },
+                "left": {
+                  "description": "Left margin, accepts values labeled with units. Defaults to `0`.",
+                  "type": ["string", "number"]
+                },
+                "right": {
+                  "description": "Right margin, accepts values labeled with units. Defaults to `0`.",
+                  "type": ["string", "number"]
+                },
+                "top": {
+                  "description": "Top margin, accepts values labeled with units. Defaults to `0`.",
+                  "type": ["string", "number"]
+                }
+              },
+              "type": "object"
             },
-            "top": {
-              "description": "Top margin, accepts values labeled with units. Defaults to `0`.",
+            "pageRanges": {
+              "description": "Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means print all pages.",
+              "type": "string"
+            },
+            "path": {
+              "description": "The file path to save the PDF to. If `path` is a relative path, then it is resolved relative to the current working\ndirectory. If no path is provided, the PDF won't be saved to the disk.",
+              "type": "string"
+            },
+            "preferCSSPageSize": {
+              "description": "Give any CSS `@page` size declared in the page priority over what is declared in `width` and `height` or `format`\noptions. Defaults to `false`, which will scale the content to fit the paper size.",
+              "type": "boolean"
+            },
+            "printBackground": {
+              "description": "Print background graphics. Defaults to `false`.",
+              "type": "boolean"
+            },
+            "scale": {
+              "description": "Scale of the webpage rendering. Defaults to `1`. Scale amount must be between 0.1 and 2.",
+              "type": "number"
+            },
+            "width": {
+              "description": "Paper width, accepts values labeled with units.",
               "type": ["string", "number"]
             }
           },
           "type": "object"
         },
-        "pageRanges": {
-          "description": "Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means print all pages.",
-          "type": "string"
-        },
-        "path": {
-          "description": "The file path to save the PDF to. If `path` is a relative path, then it is resolved relative to the current working\ndirectory. If no path is provided, the PDF won't be saved to the disk.",
-          "type": "string"
-        },
-        "preferCSSPageSize": {
-          "description": "Give any CSS `@page` size declared in the page priority over what is declared in `width` and `height` or `format`\noptions. Defaults to `false`, which will scale the content to fit the paper size.",
-          "type": "boolean"
-        },
-        "printBackground": {
-          "description": "Print background graphics. Defaults to `false`.",
-          "type": "boolean"
-        },
-        "scale": {
-          "description": "Scale of the webpage rendering. Defaults to `1`. Scale amount must be between 0.1 and 2.",
-          "type": "number"
-        },
-        "width": {
-          "description": "Paper width, accepts values labeled with units.",
-          "type": ["string", "number"]
+        {
+          "type": "null"
         }
-      },
-      "type": "object"
+      ]
     },
     "url": {
       "type": "string"
     }
   },
+  "required": ["url"],
   "type": "object"
 }
