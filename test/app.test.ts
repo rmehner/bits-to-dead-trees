@@ -72,14 +72,17 @@ describe("POST /pdf", () => {
     expect(response.payload).toEqual("pdf");
   });
 
-  it("allows to overwrite gotoOptions", async () => {
+  it("allows to overwrite gotoOptions but merges them with the defaults", async () => {
     await app.inject({
       method: "POST",
       url: "/pdf",
       payload: { url: "/foobar", gotoOptions: { timeout: 300 } },
     });
 
-    expect(gotoMethod).toHaveBeenCalledWith("/foobar", { timeout: 300 });
+    expect(gotoMethod).toHaveBeenCalledWith("/foobar", {
+      timeout: 300,
+      waitUntil: "networkidle",
+    });
   });
 
   it("uses the default browserContextOptions if not passed or empty", async () => {
