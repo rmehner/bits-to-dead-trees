@@ -26,7 +26,7 @@
     "postinstall": "npx playwright install chromium",
     "add-changeset": "changeset",
     "release": "changeset publish",
-    "test": "vitest --reporter verbose",
+    "test": "vitest",
     "ts-check": "npx tsc --noEmit"
   },
   "dependencies": {
