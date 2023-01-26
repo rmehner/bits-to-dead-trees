@@ -1,4 +1,9 @@
 {
-  "watch": ["index.js", "schemas/pdf_request_body.json", "package-lock.json"],
+  "watch": [
+    "app.js",
+    "server.js",
+    "schemas/pdf_request_body.json",
+    "package-lock.json"
+  ],
   "ext": "js,json"
 }

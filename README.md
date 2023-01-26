@@ -34,11 +34,17 @@ The server exposes the `/pdf` endpoint that listens to a POST request and expect
 ```json
 {
   "url": "https://your-target-url.com/site/you/want/a/pdf/of",
-  "options": {}
+  "pdfOptions": {},
+  "gotoOptions": {},
+  "browserContextOptions": {}
 }
 ```
 
-`options` are the options Playwright knows about PDF: https://playwright.dev/docs/api/class-page#page-pdf. We pass them to Playwright directly, so please refer to their docs.
+- `pdfOptions` are the options for the `pdf` call in Playwright: https://playwright.dev/docs/api/class-page#page-pdf.
+- `gotoOptions` are the options for the `goto` method in Playwright: https://playwright.dev/docs/api/class-page#page-goto
+  - if you don't pass anything, we default to a timeout of 60000 and wait for `networkidle`
+- `browserContextOptions` are the options for the browser context in Playwright: https://playwright.dev/docs/api/class-browser#browser-new-context
+  - if you don't pass anything, we default to set `ignoreHTTPSErrors` to `true`
 
 The response is the PDF file.
 
