@@ -57,12 +57,15 @@ const createPDF = async (
 
     const response = await page.goto(url, gotoOptions);
     if (response?.ok()) {
-      const pdf = await page.pdf(pdfOptions);
-      return pdf;
+      return page.pdf(pdfOptions);
     }
-    throw new Error(
-      `Request returned ${response?.status()}. Did not create PDF.`
-    );
+
+    return Promise.reject({
+      error: true,
+      message: await response?.text(),
+      status: response?.status(),
+      statusText: response?.statusText(),
+    });
   } finally {
     await browser.close();
   }
@@ -114,13 +117,12 @@ function build(opts = {}) {
       const gotoOpts = isEmpty(gotoOptions) ? defaultGotoOptions : gotoOptions;
 
       try {
-        return createPDF(url, pdfOpts, contextOpts, gotoOpts);
+        return await createPDF(url, pdfOpts, contextOpts, gotoOpts);
       } catch (error) {
-        response.code(500);
+        // @ts-ignore
+        response.code(error.status ?? 500);
 
-        return {
-          error,
-        };
+        return error;
       }
     }
   );
