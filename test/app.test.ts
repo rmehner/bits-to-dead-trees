@@ -1,14 +1,5 @@
-import { Browser, chromium } from "playwright-core";
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-  Mock,
-  MockedFunction,
-} from "vitest";
+import { chromium } from "playwright-core";
+import { afterEach, beforeEach, describe, expect, it, vi, Mock } from "vitest";
 
 import build, {
   defaultBrowserContextOptions,
@@ -48,7 +39,14 @@ describe("POST /pdf", () => {
   let close = vi.fn();
 
   beforeEach(() => {
-    gotoMethod = vi.fn().mockResolvedValue(null);
+    gotoMethod = vi.fn().mockResolvedValue({
+      ok() {
+        return true;
+      },
+      status() {
+        return 200;
+      },
+    });
     pdf = vi.fn().mockResolvedValue(Buffer.from("pdf"));
     newPage = vi.fn().mockResolvedValue({ goto: gotoMethod, pdf });
     newContext = vi.fn().mockResolvedValue({ newPage });
@@ -127,6 +125,44 @@ describe("POST /pdf", () => {
     expect(parsedResponse.message).toContain("body/gotoOptions");
   });
 
+  it("returns error if page could not load", async () => {
+    gotoMethod.mockResolvedValue({
+      ok() {
+        return false;
+      },
+
+      status() {
+        return 404;
+      },
+
+      statusText() {
+        return "Not found";
+      },
+
+      async text() {
+        return "We tried very hard, but could not find the page.";
+      },
+    });
+
+    const response = await app.inject({
+      method: "POST",
+      url: "/pdf",
+      payload: {
+        url: "/foobar",
+      },
+    });
+
+    expect(response.statusCode).toEqual(404);
+    const error = JSON.parse(response.body);
+
+    expect(error).toMatchObject({
+      error: true,
+      status: 404,
+      statusText: "Not found",
+      message: "We tried very hard, but could not find the page.",
+    });
+  });
+
   it("allows to pass options to the pdf call", async () => {
     await app.inject({
       method: "POST",
@@ -143,7 +179,7 @@ describe("POST /pdf", () => {
   });
 
   it("returns 500 if something broke", async () => {
-    pdf.mockRejectedValue("OH NO");
+    pdf.mockRejectedValue(new Error("OH NO"));
 
     const response = await app.inject({
       method: "POST",
@@ -154,7 +190,11 @@ describe("POST /pdf", () => {
     });
 
     expect(response.statusCode).toEqual(500);
-    expect(response.body).toEqual("OH NO");
+    expect(JSON.parse(response.body)).toMatchObject({
+      statusCode: 500,
+      error: "Internal Server Error",
+      message: "OH NO",
+    });
   });
 
   it("allows null as empty for options", async () => {
