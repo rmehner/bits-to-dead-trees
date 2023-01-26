@@ -1,5 +1,14 @@
-import { chromium } from "playwright-core";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { Browser, chromium } from "playwright-core";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+  Mock,
+  MockedFunction,
+} from "vitest";
 
 import build, {
   defaultBrowserContextOptions,
@@ -39,13 +48,16 @@ describe("POST /pdf", () => {
   let close = vi.fn();
 
   beforeEach(() => {
-    gotoMethod = vi.fn().mockReturnValue(null);
-    pdf = vi.fn().mockReturnValue(Buffer.from("pdf"));
-    newPage = vi.fn().mockReturnValue({ goto: gotoMethod, pdf });
-    newContext = vi.fn().mockReturnValue({ newPage });
+    gotoMethod = vi.fn().mockResolvedValue(null);
+    pdf = vi.fn().mockResolvedValue(Buffer.from("pdf"));
+    newPage = vi.fn().mockResolvedValue({ goto: gotoMethod, pdf });
+    newContext = vi.fn().mockResolvedValue({ newPage });
     close = vi.fn();
 
-    chromium.launch.mockReturnValue({ newContext, close });
+    (chromium.launch as Mock<any[], any>).mockResolvedValue({
+      newContext,
+      close,
+    });
   });
 
   it("sends a buffer of the PDF as response", async () => {
@@ -56,20 +68,10 @@ describe("POST /pdf", () => {
     });
 
     expect(gotoMethod).toHaveBeenCalledTimes(1);
-    expect(gotoMethod.calls[0][0]).toEqual("/foobar");
+    expect(gotoMethod).toHaveBeenLastCalledWith("/foobar", defaultGotoOptions);
 
     expect(response.statusCode).toEqual(200);
     expect(response.payload).toEqual("pdf");
-  });
-
-  it("uses the default gotoOptions if not passed or empty", async () => {
-    await app.inject({
-      method: "POST",
-      url: "/pdf",
-      payload: { url: "/foobar", gotoOptions: {} },
-    });
-
-    expect(gotoMethod).toHaveBeenCalledWith("/foobar", defaultGotoOptions);
   });
 
   it("allows to overwrite gotoOptions", async () => {
