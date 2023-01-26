@@ -2,7 +2,6 @@
 
 import { fastify } from "fastify";
 import { chromium } from "playwright-core";
-import lodash from "lodash";
 import { readFileSync } from "node:fs";
 
 // we'd love to do this, but eslint doesn't like import assertions yet
@@ -10,8 +9,6 @@ import { readFileSync } from "node:fs";
 const PdfRequestBodySchema = JSON.parse(
   readFileSync("./pdf_request_body.json", { encoding: "utf-8" })
 );
-
-const { isEmpty } = lodash;
 
 /**
  * @typedef {Parameters<import("playwright-core").Page["pdf"]>[0]} PdfOptions
@@ -110,11 +107,17 @@ function build(opts = {}) {
       const { url, pdfOptions, browserContextOptions, gotoOptions } =
         request.body;
 
-      const pdfOpts = !isEmpty(pdfOptions) ? pdfOptions : {};
-      const contextOpts = isEmpty(browserContextOptions)
-        ? defaultBrowserContextOptions
-        : browserContextOptions;
-      const gotoOpts = isEmpty(gotoOptions) ? defaultGotoOptions : gotoOptions;
+      const pdfOpts = { ...pdfOptions };
+
+      const contextOpts = {
+        ...defaultBrowserContextOptions,
+        ...browserContextOptions,
+      };
+
+      const gotoOpts = {
+        ...defaultGotoOptions,
+        ...gotoOptions,
+      };
 
       try {
         return await createPDF(url, pdfOpts, contextOpts, gotoOpts);
