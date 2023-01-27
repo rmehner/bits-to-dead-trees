@@ -116,10 +116,16 @@ function build(opts = {}) {
 
       try {
         const browser = await chromium.launch();
-        const createdPDF = await createPDF(browser, url, pdfOpts, contextOpts, gotoOpts);
+        const createdPDF = await createPDF(
+          browser,
+          url,
+          pdfOpts,
+          contextOpts,
+          gotoOpts
+        );
         await browser.close();
 
-        return createdPDF
+        return createdPDF;
       } catch (error) {
         // @ts-ignore
         response.code(error.status ?? 500);
