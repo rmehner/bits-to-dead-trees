@@ -13,6 +13,7 @@ const PdfRequestBodySchema = JSON.parse(
 /**
  * @typedef {Parameters<import("playwright-core").Page["pdf"]>[0]} PdfOptions
  * @typedef {Parameters<import("playwright-core").Page["goto"]>[1]} GotoOptions
+ * @typedef {import("playwright-core").Browser} Browser
  * @typedef {import("playwright-core").BrowserContextOptions} BrowserContextOptions
  */
 
@@ -34,6 +35,7 @@ export const defaultGotoOptions = /** @type {const} */ ({
 
 /**
  *
+ * @param {Browser} browser
  * @param {string} url
  * @param {PdfOptions} pdfOptions
  * @param {BrowserContextOptions} browserContextOptions
