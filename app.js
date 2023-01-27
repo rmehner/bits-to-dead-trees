@@ -13,6 +13,7 @@ const PdfRequestBodySchema = JSON.parse(
 /**
  * @typedef {Parameters<import("playwright-core").Page["pdf"]>[0]} PdfOptions
  * @typedef {Parameters<import("playwright-core").Page["goto"]>[1]} GotoOptions
+ * @typedef {import("playwright-core").Browser} Browser
  * @typedef {import("playwright-core").BrowserContextOptions} BrowserContextOptions
  */
 
@@ -34,6 +35,7 @@ export const defaultGotoOptions = /** @type {const} */ ({
 
 /**
  *
+ * @param {Browser} browser
  * @param {string} url
  * @param {PdfOptions} pdfOptions
  * @param {BrowserContextOptions} browserContextOptions
@@ -41,31 +43,26 @@ export const defaultGotoOptions = /** @type {const} */ ({
  * @returns Buffer
  */
 const createPDF = async (
+  browser,
   url,
   pdfOptions = {},
   browserContextOptions = {},
   gotoOptions = {}
 ) => {
-  const browser = await chromium.launch();
+  const context = await browser.newContext(browserContextOptions);
+  const page = await context.newPage();
 
-  try {
-    const context = await browser.newContext(browserContextOptions);
-    const page = await context.newPage();
-
-    const response = await page.goto(url, gotoOptions);
-    if (response?.ok()) {
-      return page.pdf(pdfOptions);
-    }
-
-    return Promise.reject({
-      error: true,
-      message: await response?.text(),
-      status: response?.status(),
-      statusText: response?.statusText(),
-    });
-  } finally {
-    await browser.close();
+  const response = await page.goto(url, gotoOptions);
+  if (response?.ok()) {
+    return page.pdf(pdfOptions);
   }
+
+  return Promise.reject({
+    error: true,
+    message: await response?.text(),
+    status: response?.status(),
+    statusText: response?.statusText(),
+  });
 };
 
 /**
@@ -119,13 +116,22 @@ function build(opts = {}) {
         ...gotoOptions,
       };
 
+      const browser = await chromium.launch();
       try {
-        return await createPDF(url, pdfOpts, contextOpts, gotoOpts);
+        return await createPDF(
+          browser,
+          url,
+          pdfOpts,
+          contextOpts,
+          gotoOpts
+        );
       } catch (error) {
         // @ts-ignore
         response.code(error.status ?? 500);
 
         return error;
+      } finally {
+        await browser.close();
       }
     }
   );
