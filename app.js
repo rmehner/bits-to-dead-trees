@@ -131,7 +131,7 @@ function build(opts = {}) {
 
         return error;
       } finally {
-        await browser.close();
+        browser.close();
       }
     }
   );
