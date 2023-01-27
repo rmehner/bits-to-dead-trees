@@ -41,31 +41,26 @@ export const defaultGotoOptions = /** @type {const} */ ({
  * @returns Buffer
  */
 const createPDF = async (
+  browser,
   url,
   pdfOptions = {},
   browserContextOptions = {},
   gotoOptions = {}
 ) => {
-  const browser = await chromium.launch();
+  const context = await browser.newContext(browserContextOptions);
+  const page = await context.newPage();
 
-  try {
-    const context = await browser.newContext(browserContextOptions);
-    const page = await context.newPage();
-
-    const response = await page.goto(url, gotoOptions);
-    if (response?.ok()) {
-      return page.pdf(pdfOptions);
-    }
-
-    return Promise.reject({
-      error: true,
-      message: await response?.text(),
-      status: response?.status(),
-      statusText: response?.statusText(),
-    });
-  } finally {
-    await browser.close();
+  const response = await page.goto(url, gotoOptions);
+  if (response?.ok()) {
+    return page.pdf(pdfOptions);
   }
+
+  return Promise.reject({
+    error: true,
+    message: await response?.text(),
+    status: response?.status(),
+    statusText: response?.statusText(),
+  });
 };
 
 /**
@@ -120,7 +115,11 @@ function build(opts = {}) {
       };
 
       try {
-        return await createPDF(url, pdfOpts, contextOpts, gotoOpts);
+        const browser = await chromium.launch();
+        const createdPDF = await createPDF(browser, url, pdfOpts, contextOpts, gotoOpts);
+        await browser.close();
+
+        return createdPDF
       } catch (error) {
         // @ts-ignore
         response.code(error.status ?? 500);
