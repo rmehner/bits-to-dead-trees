@@ -116,23 +116,22 @@ function build(opts = {}) {
         ...gotoOptions,
       };
 
+      const browser = await chromium.launch();
       try {
-        const browser = await chromium.launch();
-        const createdPDF = await createPDF(
+        return await createPDF(
           browser,
           url,
           pdfOpts,
           contextOpts,
           gotoOpts
         );
-        await browser.close();
-
-        return createdPDF;
       } catch (error) {
         // @ts-ignore
         response.code(error.status ?? 500);
 
         return error;
+      } finally {
+        await browser.close();
       }
     }
   );
