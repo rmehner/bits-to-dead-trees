@@ -222,4 +222,28 @@ describe("POST /pdf", () => {
 
     expect(close).toHaveBeenCalled();
   });
+
+  it("generates the pdf before closing the browser", async () => {
+    let i = 0;
+
+    pdf.mockImplementation(async () => {
+      await new Promise(r => setTimeout(r, 100));
+
+      return i++;
+    });
+
+    close.mockImplementation(() => {
+      return i++;
+    });
+
+    await app.inject({
+      method: "POST",
+      url: "/pdf",
+      payload: {
+        url: "https://google.com",
+      },
+    });
+
+    expect(pdf.results[0][1]).toBeLessThan(close.results[0][1]);
+  });
 });
