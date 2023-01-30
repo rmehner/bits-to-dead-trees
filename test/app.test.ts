@@ -227,7 +227,7 @@ describe("POST /pdf", () => {
     let i = 0;
 
     pdf.mockImplementation(async () => {
-      await new Promise(r => setTimeout(r, 100));
+      await new Promise((r) => setTimeout(r, 100));
 
       return i++;
     });
