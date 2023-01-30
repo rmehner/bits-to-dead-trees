@@ -244,6 +244,6 @@ describe("POST /pdf", () => {
       },
     });
 
-    expect(pdf.results[0][1]).toBeLessThan(close.results[0][1]);
+    expect(pdf.mock.results[0].value).toBeLessThan(close.mock.results[0].value);
   });
 });
