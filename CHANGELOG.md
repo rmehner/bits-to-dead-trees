@@ -1,5 +1,12 @@
 # bits-to-dead-trees
 
+## 2.0.1
+
+### Patch Changes
+
+- 57d032f: Don't close browser if it's currently creating a PDF. We've added smoke tests, so
+  this shouldn't happen again. Sorry!
+
 ## 2.0.0
 
 ### Major Changes
