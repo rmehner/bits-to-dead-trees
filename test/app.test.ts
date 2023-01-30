@@ -50,7 +50,6 @@ describe("POST /pdf", () => {
     pdf = vi.fn().mockResolvedValue(Buffer.from("pdf"));
     newPage = vi.fn().mockResolvedValue({ goto: gotoMethod, pdf });
     newContext = vi.fn().mockResolvedValue({ newPage });
-    close = vi.fn();
 
     (chromium.launch as Mock<any[], any>).mockResolvedValue({
       newContext,
