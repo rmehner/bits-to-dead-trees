@@ -1,5 +1,13 @@
 # bits-to-dead-trees
 
+## 2.1.0
+
+### Minor Changes
+
+- [`567b753`](https://github.com/rmehner/bits-to-dead-trees/commit/567b753ca21c6788b246b69b62c484790bc0d478) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade to Playwright 1.13 and Node 18
+
+  This includes new browser versions too!
+
 ## 2.0.1
 
 ### Patch Changes
