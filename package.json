@@ -44,6 +44,6 @@
     "prettier": "^2.8.8",
     "tslib": "^2.5.0",
     "typescript-json-schema": "^0.55.0",
-    "vitest": "^0.29.8"
+    "vitest": "^0.30.1"
   }
 }
