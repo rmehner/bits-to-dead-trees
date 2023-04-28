@@ -1,5 +1,17 @@
 # bits-to-dead-trees
 
+## 2.3.0
+
+### Minor Changes
+
+- [`5e11653`](https://github.com/rmehner/bits-to-dead-trees/commit/5e11653dd4b23c9b795071e404a4c22080202ca1) Thanks [@rmehner](https://github.com/rmehner)! - Update schemas to allow new origin option for HTTPCredentials in playwright.
+
+- [`2a46e1b`](https://github.com/rmehner/bits-to-dead-trees/commit/2a46e1b99a70e1c02365d97cf1af795a5e2a04eb) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade to Playwright 1.33.0
+
+### Patch Changes
+
+- [`4b628d1`](https://github.com/rmehner/bits-to-dead-trees/commit/4b628d1eea285e48a2c9fe276835dfb297d4546e) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade fastify to 4.17.0
+
 ## 2.2.2
 
 ### Patch Changes
