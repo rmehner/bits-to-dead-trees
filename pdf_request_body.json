@@ -30,7 +30,7 @@
           "description": "Emulates `'prefers-colors-scheme'` media feature, supported values are `'light'`, `'dark'`, `'no-preference'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'light'`."
         },
         "deviceScaleFactor": {
-          "description": "Specify device scale factor (can be thought of as dpr). Defaults to `1`.",
+          "description": "Specify device scale factor (can be thought of as dpr). Defaults to `1`. Learn more about\n[emulating devices with device scale factor](https://playwright.dev/docs/emulation#devices).",
           "type": "number"
         },
         "extraHTTPHeaders": {
@@ -56,27 +56,27 @@
           "$ref": "#/definitions/Geolocation"
         },
         "hasTouch": {
-          "description": "Specifies if viewport supports touch events. Defaults to false.",
+          "description": "Specifies if viewport supports touch events. Defaults to false. Learn more about\n[mobile emulation](https://playwright.dev/docs/emulation#devices).",
           "type": "boolean"
         },
         "httpCredentials": {
           "$ref": "#/definitions/HTTPCredentials",
-          "description": "Credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)."
+          "description": "Credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication). If no\norigin is specified, the username and password are sent to any servers upon unauthorized responses."
         },
         "ignoreHTTPSErrors": {
           "description": "Whether to ignore HTTPS errors when sending network requests. Defaults to `false`.",
           "type": "boolean"
         },
         "isMobile": {
-          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. Defaults to `false`. Not\nsupported in Firefox.",
+          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,\nso you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more\nabout [mobile emulation](https://playwright.dev/docs/emulation#isMobile).",
           "type": "boolean"
         },
         "javaScriptEnabled": {
-          "description": "Whether or not to enable JavaScript in the context. Defaults to `true`.",
+          "description": "Whether or not to enable JavaScript in the context. Defaults to `true`. Learn more about\n[disabling JavaScript](https://playwright.dev/docs/emulation#javascript-enabled).",
           "type": "boolean"
         },
         "locale": {
-          "description": "Specify user locale, for example `en-GB`, `de-DE`, etc. Locale will affect `navigator.language` value,\n`Accept-Language` request header value as well as number and date formatting rules.",
+          "description": "Specify user locale, for example `en-GB`, `de-DE`, etc. Locale will affect `navigator.language` value,\n`Accept-Language` request header value as well as number and date formatting rules. Learn more about emulation in\nour [emulation guide](https://playwright.dev/docs/emulation#locale--timezone).",
           "type": "string"
         },
         "logger": {
@@ -84,7 +84,7 @@
           "description": "Logger sink for Playwright logging."
         },
         "offline": {
-          "description": "Whether to emulate network being offline. Defaults to `false`.",
+          "description": "Whether to emulate network being offline. Defaults to `false`. Learn more about\n[network emulation](https://playwright.dev/docs/emulation#offline).",
           "type": "boolean"
         },
         "permissions": {
@@ -308,7 +308,7 @@
               "type": "string"
             }
           ],
-          "description": "Populates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state).\nEither a path to the file with saved storage, or an object with the following fields:"
+          "description": "Learn more about [storage state and auth](https://playwright.dev/docs/auth).\n\nPopulates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state).\nEither a path to the file with saved storage, or an object with the following fields:"
         },
         "strictSelectors": {
           "description": "If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on\nselectors that imply single target DOM element will throw when more than one element matches the selector. This\noption does not affect any Locator APIs (Locators are always strict). See [Locator] to learn more about the strict\nmode.",
@@ -349,7 +349,7 @@
               "type": "null"
             }
           ],
-          "description": "Emulates consistent viewport for each page. Defaults to an 1280x720 viewport. `null` disables the default viewport."
+          "description": "Emulates consistent viewport for each page. Defaults to an 1280x720 viewport.  Use `null` to disable the consistent\nviewport emulation. Learn more about [viewport emulation](https://playwright.dev/docs/emulation#viewport).\n\n**NOTE** The `null` value opts out from the default presets, makes viewport depend on the host window size defined\nby the operating system. It makes the execution of the tests non-deterministic."
         }
       },
       "type": "object"
@@ -376,6 +376,10 @@
     "HTTPCredentials": {
       "additionalProperties": false,
       "properties": {
+        "origin": {
+          "description": "Restrain sending http credentials on specific origin (scheme://host:port).",
+          "type": "string"
+        },
         "password": {
           "type": "string"
         },
@@ -472,11 +476,11 @@
               "type": "string"
             },
             "timeout": {
-              "description": "Maximum operation time in milliseconds, defaults to 30 seconds, pass `0` to disable timeout. The default value can\nbe changed by using the\n[browserContext.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-navigation-timeout),\n[browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout),\n[page.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-navigation-timeout)\nor [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.",
+              "description": "Maximum operation time in milliseconds. Defaults to `0` - no timeout. The default value can be changed via\n`navigationTimeout` option in the config, or by using the\n[browserContext.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-navigation-timeout),\n[browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout),\n[page.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-navigation-timeout)\nor [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.",
               "type": "number"
             },
             "waitUntil": {
-              "description": "When to consider operation succeeded, defaults to `load`. Events can be either:\n- `'domcontentloaded'` - consider operation to be finished when the `DOMContentLoaded` event is fired.\n- `'load'` - consider operation to be finished when the `load` event is fired.\n- `'networkidle'` - consider operation to be finished when there are no network connections for at least `500`\n  ms.\n- `'commit'` - consider operation to be finished when network response is received and the document started\n  loading.",
+              "description": "When to consider operation succeeded, defaults to `load`. Events can be either:\n- `'domcontentloaded'` - consider operation to be finished when the `DOMContentLoaded` event is fired.\n- `'load'` - consider operation to be finished when the `load` event is fired.\n- `'networkidle'` - **DISCOURAGED** consider operation to be finished when there are no network connections for\n  at least `500` ms. Don't use this method for testing, rely on web assertions to assess readiness instead.\n- `'commit'` - consider operation to be finished when network response is received and the document started\n  loading.",
               "enum": ["commit", "domcontentloaded", "load", "networkidle"],
               "type": "string"
             }
