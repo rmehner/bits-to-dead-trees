@@ -222,12 +222,12 @@
               "additionalProperties": false,
               "properties": {
                 "cookies": {
-                  "description": "cookies to set for context",
+                  "description": "Cookies to set for context",
                   "items": {
                     "additionalProperties": false,
                     "properties": {
                       "domain": {
-                        "description": "domain and path are required",
+                        "description": "Domain and path are required. For the cookie to apply to all subdomains as well, prefix domain with a dot, like\nthis: \".example.com\"",
                         "type": "string"
                       },
                       "expires": {
@@ -241,7 +241,7 @@
                         "type": "string"
                       },
                       "path": {
-                        "description": "domain and path are required",
+                        "description": "Domain and path are required",
                         "type": "string"
                       },
                       "sameSite": {
@@ -308,7 +308,7 @@
               "type": "string"
             }
           ],
-          "description": "Learn more about [storage state and auth](https://playwright.dev/docs/auth).\n\nPopulates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state).\nEither a path to the file with saved storage, or an object with the following fields:"
+          "description": "Learn more about [storage state and auth](https://playwright.dev/docs/auth).\n\nPopulates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state)."
         },
         "strictSelectors": {
           "description": "If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on\nselectors that imply single target DOM element will throw when more than one element matches the selector. This\noption does not affect any Locator APIs (Locators are always strict). See [Locator] to learn more about the strict\nmode.",
