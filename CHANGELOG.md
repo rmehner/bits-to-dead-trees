@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.4.1
+
+### Patch Changes
+
+- [`8193c8a`](https://github.com/rmehner/bits-to-dead-trees/commit/8193c8a8d77760d57b9041a3fa37da0db347e575) Thanks [@rmehner](https://github.com/rmehner)! - Update PDF Request Body Schema with the newest version of Playwright
+
 ## 2.4.0
 
 ### Minor Changes
