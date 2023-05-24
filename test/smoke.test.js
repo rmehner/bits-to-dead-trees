@@ -21,7 +21,7 @@ describe(
         method: "POST",
         url: "/pdf",
         payload: {
-          url: "http://httpbin.org/status/404",
+          url: "https://httpstat.us/404",
         },
       });
 
@@ -31,8 +31,8 @@ describe(
       expect(error).toMatchObject({
         error: true,
         status: 404,
-        statusText: "NOT FOUND",
-        message: "",
+        statusText: "Not Found",
+        message: "404 Not Found",
       });
     });
   },
