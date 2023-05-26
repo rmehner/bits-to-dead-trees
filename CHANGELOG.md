@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.4.2
+
+### Patch Changes
+
+- [`50cd8cb`](https://github.com/rmehner/bits-to-dead-trees/commit/50cd8cb0cab8aed18b4a352df9d8e4e1243df4ff) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade Playwright to 1.34.3
+
 ## 2.4.1
 
 ### Patch Changes
