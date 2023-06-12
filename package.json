@@ -23,7 +23,7 @@
     "start:dev": "nodemon --inspect server.js",
     "dump-schemas": "typescript-json-schema --noExtraProps --required --strictNullChecks types/schemas.ts PdfRequestBody --out pdf_request_body.json",
     "update-schemas": "npm run dump-schemas && npm run format",
-    "postinstall": "npx playwright install chromium",
+    "postinstall": "npx playwright-core install chromium",
     "add-changeset": "changeset",
     "release": "changeset publish",
     "test": "vitest --reporter verbose",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "fastify": "^4.17.0",
-    "playwright-core": "^1.34.3"
+    "playwright-core": "^1.35.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",

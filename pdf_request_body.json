@@ -10,11 +10,11 @@
           "type": "boolean"
         },
         "baseURL": {
-          "description": "When using [page.goto(url[, options])](https://playwright.dev/docs/api/class-page#page-goto),\n[page.route(url, handler[, options])](https://playwright.dev/docs/api/class-page#page-route),\n[page.waitForURL(url[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-url),\n[page.waitForRequest(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-request),\nor\n[page.waitForResponse(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-response)\nit takes the base URL in consideration by using the\n[`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor for building the corresponding URL.\nExamples:\n- baseURL: `http://localhost:3000` and navigating to `/bar.html` results in `http://localhost:3000/bar.html`\n- baseURL: `http://localhost:3000/foo/` and navigating to `./bar.html` results in\n  `http://localhost:3000/foo/bar.html`\n- baseURL: `http://localhost:3000/foo` (without trailing slash) and navigating to `./bar.html` results in\n  `http://localhost:3000/bar.html`",
+          "description": "When using [page.goto(url[, options])](https://playwright.dev/docs/api/class-page#page-goto),\n[page.route(url, handler[, options])](https://playwright.dev/docs/api/class-page#page-route),\n[page.waitForURL(url[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-url),\n[page.waitForRequest(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-request),\nor\n[page.waitForResponse(urlOrPredicate[, options])](https://playwright.dev/docs/api/class-page#page-wait-for-response)\nit takes the base URL in consideration by using the\n[`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor for building the corresponding URL.\nUnset by default. Examples:\n- baseURL: `http://localhost:3000` and navigating to `/bar.html` results in `http://localhost:3000/bar.html`\n- baseURL: `http://localhost:3000/foo/` and navigating to `./bar.html` results in\n  `http://localhost:3000/foo/bar.html`\n- baseURL: `http://localhost:3000/foo` (without trailing slash) and navigating to `./bar.html` results in\n  `http://localhost:3000/bar.html`",
           "type": "string"
         },
         "bypassCSP": {
-          "description": "Toggles bypassing page's Content-Security-Policy.",
+          "description": "Toggles bypassing page's Content-Security-Policy. Defaults to `false`.",
           "type": "boolean"
         },
         "colorScheme": {
@@ -37,7 +37,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "An object containing additional HTTP headers to be sent with every request.",
+          "description": "An object containing additional HTTP headers to be sent with every request. Defaults to none.",
           "type": "object"
         },
         "forcedColors": {
@@ -76,7 +76,7 @@
           "type": "boolean"
         },
         "locale": {
-          "description": "Specify user locale, for example `en-GB`, `de-DE`, etc. Locale will affect `navigator.language` value,\n`Accept-Language` request header value as well as number and date formatting rules. Learn more about emulation in\nour [emulation guide](https://playwright.dev/docs/emulation#locale--timezone).",
+          "description": "Specify user locale, for example `en-GB`, `de-DE`, etc. Locale will affect `navigator.language` value,\n`Accept-Language` request header value as well as number and date formatting rules. Defaults to the system default\nlocale. Learn more about emulation in our [emulation guide](https://playwright.dev/docs/emulation#locale--timezone).",
           "type": "string"
         },
         "logger": {
@@ -88,7 +88,7 @@
           "type": "boolean"
         },
         "permissions": {
-          "description": "A list of permissions to grant to all pages in this context. See\n[browserContext.grantPermissions(permissions[, options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-grant-permissions)\nfor more details.",
+          "description": "A list of permissions to grant to all pages in this context. See\n[browserContext.grantPermissions(permissions[, options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-grant-permissions)\nfor more details. Defaults to none.",
           "items": {
             "type": "string"
           },
@@ -96,7 +96,7 @@
         },
         "proxy": {
           "additionalProperties": false,
-          "description": "Network proxy settings to use with this context.\n\n**NOTE** For Chromium on Windows the browser needs to be launched with the global proxy for this option to work. If\nall contexts override the proxy, global proxy will be never used and can be any string, for example `launch({\nproxy: { server: 'http://per-context' } })`.",
+          "description": "Network proxy settings to use with this context. Defaults to none.\n\n**NOTE** For Chromium on Windows the browser needs to be launched with the global proxy for this option to work. If\nall contexts override the proxy, global proxy will be never used and can be any string, for example `launch({\nproxy: { server: 'http://per-context' } })`.",
           "properties": {
             "bypass": {
               "description": "Optional comma-separated domains to bypass proxy, for example `\".com, chromium.org, .domain.com\"`.",
@@ -149,7 +149,7 @@
                   "type": "string"
                 }
               ],
-              "description": "A glob or regex pattern to filter requests that are stored in the HAR. When a `baseURL` via the context options was\nprovided and the passed URL is a path, it gets merged via the\n[`new URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor."
+              "description": "A glob or regex pattern to filter requests that are stored in the HAR. When a `baseURL` via the context options was\nprovided and the passed URL is a path, it gets merged via the\n[`new URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor. Defaults to none."
             }
           },
           "required": ["path"],
@@ -311,11 +311,11 @@
           "description": "Learn more about [storage state and auth](https://playwright.dev/docs/auth).\n\nPopulates context with given storage state. This option can be used to initialize context with logged-in\ninformation obtained via\n[browserContext.storageState([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-storage-state)."
         },
         "strictSelectors": {
-          "description": "If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on\nselectors that imply single target DOM element will throw when more than one element matches the selector. This\noption does not affect any Locator APIs (Locators are always strict). See [Locator] to learn more about the strict\nmode.",
+          "description": "If set to true, enables strict selectors mode for this context. In the strict selectors mode all operations on\nselectors that imply single target DOM element will throw when more than one element matches the selector. This\noption does not affect any Locator APIs (Locators are always strict). Defaults to `false`. See {@link Locator} to\nlearn more about the strict mode.",
           "type": "boolean"
         },
         "timezoneId": {
-          "description": "Changes the timezone of the context. See\n[ICU's metaZones.txt](https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1)\nfor a list of supported timezone IDs.",
+          "description": "Changes the timezone of the context. See\n[ICU's metaZones.txt](https://cs.chromium.org/chromium/src/third_party/icu/source/data/misc/metaZones.txt?rcl=faee8bc70570192d82d2978a71e2a615788597d1)\nfor a list of supported timezone IDs. Defaults to the system timezone.",
           "type": "string"
         },
         "userAgent": {
