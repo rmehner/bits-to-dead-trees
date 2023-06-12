@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o nounset
+
+PATH_TO_SCRIPT=$(dirname $(realpath $0))
+
+cd "${PATH_TO_SCRIPT}/../.." || exit 1
+
+if [[ $(git status --porcelain | grep pdf_request-body-json) ]]; then
+  echo "🚨 Detected schema changes that haven't been committed, please run 'npm run update-schemas' and commit the changes."
+  exit 2
+else
+  echo "All good, no schema changes detected. 🏝"
+fi
