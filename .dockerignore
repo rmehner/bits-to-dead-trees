@@ -1,0 +1,9 @@
+node_modules/
+.github
+.changeset
+test
+.eslintrc.json
+.prettierrc.json
+.tool-versions
+nodemon.json
+tsconfig.json
