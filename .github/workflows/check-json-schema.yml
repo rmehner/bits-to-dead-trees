@@ -3,11 +3,11 @@ name: Check JSON schema
 on: push
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  check-json-schema:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
