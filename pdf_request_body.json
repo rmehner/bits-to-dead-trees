@@ -68,7 +68,7 @@
           "type": "boolean"
         },
         "isMobile": {
-          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,\nso you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more\nabout [mobile emulation](https://playwright.dev/docs/emulation#isMobile).",
+          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,\nso you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more\nabout [mobile emulation](https://playwright.dev/docs/emulation#ismobile).",
           "type": "boolean"
         },
         "javaScriptEnabled": {
@@ -349,7 +349,7 @@
               "type": "null"
             }
           ],
-          "description": "Emulates consistent viewport for each page. Defaults to an 1280x720 viewport.  Use `null` to disable the consistent\nviewport emulation. Learn more about [viewport emulation](https://playwright.dev/docs/emulation#viewport).\n\n**NOTE** The `null` value opts out from the default presets, makes viewport depend on the host window size defined\nby the operating system. It makes the execution of the tests non-deterministic."
+          "description": "Emulates consistent viewport for each page. Defaults to an 1280x720 viewport. Use `null` to disable the consistent\nviewport emulation. Learn more about [viewport emulation](https://playwright.dev/docs/emulation#viewport).\n\n**NOTE** The `null` value opts out from the default presets, makes viewport depend on the host window size defined\nby the operating system. It makes the execution of the tests non-deterministic."
         }
       },
       "type": "object"
@@ -392,7 +392,7 @@
     },
     "Logger": {
       "additionalProperties": false,
-      "description": "Playwright generates a lot of logs and they are accessible via the pluggable logger sink.\n\n```js\nconst { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.\n\n(async () => {\n  const browser = await chromium.launch({\n    logger: {\n      isEnabled: (name, severity) => name === 'browser',\n      log: (name, severity, message, args) => console.log(`${name} ${message}`)\n    }\n  });\n  ...\n})();\n```",
+      "description": "Playwright generates a lot of logs and they are accessible via the pluggable logger sink.\n\n```js\nconst { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.\n\n(async () => {\n  const browser = await chromium.launch({\n    logger: {\n      isEnabled: (name, severity) => name === 'browser',\n      log: (name, severity, message, args) => console.log(`${name} ${message}`)\n    }\n  });\n  // ...\n})();\n```",
       "type": "object"
     },
     "RegExp": {
