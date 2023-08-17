@@ -36,5 +36,5 @@ describe(
       });
     });
   },
-  { timeout: 10_000, retry: 3 }
+  { timeout: 10_000, retry: 3 },
 );
