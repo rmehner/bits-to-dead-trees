@@ -1,5 +1,14 @@
 # bits-to-dead-trees
 
+## 2.10.0
+
+### Minor Changes
+
+- [`8a7bd14`](https://github.com/rmehner/bits-to-dead-trees/commit/8a7bd148f48fa164c0ef0657ada5d57fd17688ab) Thanks [@rmehner](https://github.com/rmehner)! - Allow to use `PORT` instead of `SERVER_PORT` as environment variable to set the listening port.
+
+  This is to be more in line with most hosting providers.
+  `PORT` takes precedence over `SERVER_PORT`. Default is 8000.
+
 ## 2.9.0
 
 ### Minor Changes
