@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/playwright:v1.39.0
 
 ENV NODE_ENV=production
-ENV SERVER_PORT=8000
+ENV PORT=8000
 ENV SERVER_ADDRESS=0.0.0.0
 
 WORKDIR /app

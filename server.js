@@ -1,5 +1,5 @@
 import app from "./app.js";
-const SERVER_PORT = process.env["SERVER_PORT"] ?? 8000;
+const PORT = process.env["PORT"] ?? process.env["SERVER_PORT"] ?? 8000;
 const SERVER_ADDRESS = process.env["SERVER_ADDRESS"] ?? "localhost";
 
 const server = app({
@@ -19,7 +19,7 @@ const server = app({
 
 const startServer = async () => {
   try {
-    await server.listen({ port: +SERVER_PORT, host: SERVER_ADDRESS });
+    await server.listen({ port: +PORT, host: SERVER_ADDRESS });
   } catch (error) {
     console.error(error);
     process.exit(1);
