@@ -37,7 +37,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
     "@types/lodash": "^4.14.201",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "nodemon": "^3.0.1",
     "pino-pretty": "^10.2.3",
