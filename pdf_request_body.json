@@ -120,7 +120,7 @@
         },
         "recordHar": {
           "additionalProperties": false,
-          "description": "Enables [HAR](http://www.softwareishard.com/blog/har-12-spec) recording for all pages into `recordHar.path` file.\nIf not specified, the HAR is not recorded. Make sure to await\n[browserContext.close()](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for the HAR to\nbe saved.",
+          "description": "Enables [HAR](http://www.softwareishard.com/blog/har-12-spec) recording for all pages into `recordHar.path` file.\nIf not specified, the HAR is not recorded. Make sure to await\n[browserContext.close([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for\nthe HAR to be saved.",
           "properties": {
             "content": {
               "description": "Optional setting to control resource content management. If `omit` is specified, content is not persisted. If\n`attach` is specified, resources are persisted as separate files or entries in the ZIP archive. If `embed` is\nspecified, content is stored inline the HAR file as per HAR specification. Defaults to `attach` for `.zip` output\nfiles and to `embed` for all other file extensions.",
@@ -157,7 +157,7 @@
         },
         "recordVideo": {
           "additionalProperties": false,
-          "description": "Enables video recording for all pages into `recordVideo.dir` directory. If not specified videos are not recorded.\nMake sure to await\n[browserContext.close()](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for videos to\nbe saved.",
+          "description": "Enables video recording for all pages into `recordVideo.dir` directory. If not specified videos are not recorded.\nMake sure to await\n[browserContext.close([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for\nvideos to be saved.",
           "properties": {
             "dir": {
               "description": "Path to the directory to put videos into.",
