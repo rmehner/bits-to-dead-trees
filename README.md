@@ -11,7 +11,7 @@ of that. It's using [Playwright](https://playwright.dev) in the background for t
 
 ### Requirements
 
-1. Node 18+
+1. Node 20+
 2. npm
 
 ### Installation
