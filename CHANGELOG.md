@@ -1,5 +1,13 @@
 # bits-to-dead-trees
 
+## 2.11.0
+
+### Minor Changes
+
+- [`ab24396`](https://github.com/rmehner/bits-to-dead-trees/commit/ab24396499bfed18ca5d8ae640d82caf741ec978) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade to Node 20, to match Playwright's node version
+
+- [`ca517cd`](https://github.com/rmehner/bits-to-dead-trees/commit/ca517cdf0254a08d38bc42ffd7ec47a62dbeebc1) Thanks [@rmehner](https://github.com/rmehner)! - Upgrade to Playwright 1.40.0
+
 ## 2.10.0
 
 ### Minor Changes
