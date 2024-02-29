@@ -43,7 +43,7 @@ jobs:
 
       - name: Update version in README
         run: |
-          sed 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${{ env.TAG_NAME }}|' README.md
+          sed -i 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${{ env.TAG_NAME }}|' README.md
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
