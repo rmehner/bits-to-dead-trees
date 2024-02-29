@@ -544,6 +544,10 @@
               },
               "type": "object"
             },
+            "outline": {
+              "description": "Whether or not to embed the document outline into the PDF. Defaults to `false`.",
+              "type": "boolean"
+            },
             "pageRanges": {
               "description": "Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means print all pages.",
               "type": "string"
@@ -563,6 +567,10 @@
             "scale": {
               "description": "Scale of the webpage rendering. Defaults to `1`. Scale amount must be between 0.1 and 2.",
               "type": "number"
+            },
+            "tagged": {
+              "description": "Whether or not to generate tagged (accessible) PDF. Defaults to `false`.",
+              "type": "boolean"
             },
             "width": {
               "description": "Paper width, accepts values labeled with units.",
