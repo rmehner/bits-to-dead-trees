@@ -1,13 +1,12 @@
-name: Check JSON schema
+name: CI
 
-on: push
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+on:
+  push:
+    branches:
+      - "depfu/update/npm/prettier-**"
 
 jobs:
-  check-json-schema:
+  run-prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -22,8 +21,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Update schemas
-        run: npm run update-schemas
+      - name: Run prettier format
+        run: npm run format
 
-      - name: Commit schema changes
-        run: .github/bin/check-for-schema-changes
+      - name: Commit changes
+        run: |
+          ./.github/bin/commit-format-changes

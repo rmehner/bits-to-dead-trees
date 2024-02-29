@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o nounset
+
+if [[ `git status --porcelain` ]]; then
+  git commit -m "🤖  Update format based on new prettier version"
+  git push
+else
+  echo "No changes to source files. Doing nothing 🏝"
+fi
