@@ -3,6 +3,13 @@ name: Build and Push Docker Image
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      ref_name:
+        description: "The ref the image should be built for. This is usually the tag of the release."
+        default: "{{ github.ref_name }}"
+        required: true
+        type: string
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -13,10 +20,12 @@ jobs:
       contents: write
       packages: write
     steps:
+      - name: Set tag name
+        run: echo "TAG_NAME=${{ inputs.ref_name || github.ref_name }}" >> $GITHUB_ENV
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: $TAG_NAME
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -31,11 +40,11 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}:$TAG_NAME
 
       - name: Update version in README
         run: |
-          sed 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${{ github.ref_name }}|' README.md
+          sed 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:$TAG_NAME|' README.md
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
