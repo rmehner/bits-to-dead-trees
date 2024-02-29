@@ -50,5 +50,6 @@ jobs:
         with:
           commit-message: "🤖 Update version of docker image in README to ${{ env.TAG_NAME }}"
           title: "🤖 Update version in README after release"
+          base: main
           body: |
             Updates the referenced docker image version in the README to ${{ env.TAG_NAME }}
