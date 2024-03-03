@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Update Dockerfile
-        run: .github/bin/update-dockerfile
+        run: .github/bin/sync-playwright-version-to-dockerfile
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
