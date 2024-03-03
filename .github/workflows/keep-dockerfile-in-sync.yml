@@ -1,0 +1,25 @@
+name: Keep dockerfile in sync
+
+on:
+  push:
+    branches:
+      - "depfu/update/npm/playwright-core-**"
+
+jobs:
+  run-prettier:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Update Dockerfile
+        run: .github/bin/update-dockerfile
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 Update playwright-core in Dockerfile after depfu update"
