@@ -8,6 +8,7 @@ cd "${PATH_TO_SCRIPT}/../.." || exit 1
 
 if [[ $(git status --porcelain | grep pdf_request_body.json) ]]; then
   echo "🚨 Detected schema changes that haven't been committed, please run 'npm run update-schemas' and commit the changes."
+  git status
   exit 2
 else
   echo "All good, no schema changes detected. 🏝"
