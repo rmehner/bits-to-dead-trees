@@ -392,7 +392,7 @@
     },
     "Logger": {
       "additionalProperties": false,
-      "description": "Playwright generates a lot of logs and they are accessible via the pluggable logger sink.\n\n```js\nconst { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.\n\n(async () => {\n  const browser = await chromium.launch({\n    logger: {\n      isEnabled: (name, severity) => name === 'browser',\n      log: (name, severity, message, args) => console.log(`${name} ${message}`)\n    }\n  });\n  // ...\n})();\n```",
+      "description": "Playwright generates a lot of logs and they are accessible via the pluggable logger sink.\n\n```js\nconst { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.\n\n(async () => {\n  const browser = await chromium.launch({\n    logger: {\n      isEnabled: (name, severity) => name === 'api',\n      log: (name, severity, message, args) => console.log(`${name} ${message}`)\n    }\n  });\n  // ...\n})();\n```",
       "type": "object"
     },
     "RegExp": {
