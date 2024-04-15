@@ -2,4 +2,4 @@
 "bits-to-dead-trees": minor
 ---
 
-Update to Playwright 1.43.0
+Update to Playwright 1.43.1
