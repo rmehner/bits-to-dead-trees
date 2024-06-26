@@ -383,6 +383,11 @@
         "password": {
           "type": "string"
         },
+        "send": {
+          "description": "This option only applies to the requests sent from corresponding {@link APIRequestContext} and does not affect\nrequests sent from the browser. `'always'` - `Authorization` header with basic authentication credentials will be\nsent with the each API request. `'unauthorized` - the credentials are only sent when 401 (Unauthorized) response\nwith `WWW-Authenticate` header is received. Defaults to `'unauthorized'`.",
+          "enum": ["always", "unauthorized"],
+          "type": "string"
+        },
         "username": {
           "type": "string"
         }
