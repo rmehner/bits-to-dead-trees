@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2021"],
+    "lib": ["es2023"],
 
     "strict": true,
     "moduleResolution": "node",
