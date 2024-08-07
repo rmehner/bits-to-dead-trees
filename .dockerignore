@@ -4,6 +4,6 @@ node_modules/
 test
 .eslintrc.json
 .prettierrc.json
-.tool-versions
+.node-version
 nodemon.json
 tsconfig.json
