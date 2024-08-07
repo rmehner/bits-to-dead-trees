@@ -1,5 +1,15 @@
 # bits-to-dead-trees
 
+## 2.17.0
+
+### Minor Changes
+
+- [#378](https://github.com/rmehner/bits-to-dead-trees/pull/378) [`8bff11b`](https://github.com/rmehner/bits-to-dead-trees/commit/8bff11bc44b31e5484b895441c3505ddfd487c67) Thanks [@depfu](https://github.com/apps/depfu)! - Upgrade to Playwright 1.46.0
+
+### Patch Changes
+
+- [#378](https://github.com/rmehner/bits-to-dead-trees/pull/378) [`e898d44`](https://github.com/rmehner/bits-to-dead-trees/commit/e898d4499d40d65ea97b947e37324c5b1a6ca31c) Thanks [@depfu](https://github.com/apps/depfu)! - Update to Node 20.16.0 to match the one that the Playwright Docker image has
+
 ## 2.16.3
 
 ### Patch Changes
