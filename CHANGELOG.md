@@ -1,5 +1,13 @@
 # bits-to-dead-trees
 
+## 2.18.0
+
+### Minor Changes
+
+- [#386](https://github.com/rmehner/bits-to-dead-trees/pull/386) [`b6c3d78`](https://github.com/rmehner/bits-to-dead-trees/commit/b6c3d789ed6de2e79e3d93b168c77ca4909d13f4) Thanks [@depfu](https://github.com/apps/depfu)! - Update to Playwright 1.47.0
+
+  The new docker image runs on Ubuntu 24.04
+
 ## 2.17.1
 
 ### Patch Changes
