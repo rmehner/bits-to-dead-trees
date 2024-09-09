@@ -47,7 +47,7 @@ jobs:
           sed -i 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${{ env.TAG_NAME }}|' README.md
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "🤖 Update version of docker image in README to ${{ env.TAG_NAME }}"
           title: "🤖 Update version in README after release"
