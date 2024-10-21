@@ -18,12 +18,7 @@ const server = app({
 });
 
 const startServer = async () => {
-  try {
-    await server.listen({ port: +PORT, host: SERVER_ADDRESS });
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
+  await server.listen({ port: +PORT, host: SERVER_ADDRESS });
 };
 
 startServer();
