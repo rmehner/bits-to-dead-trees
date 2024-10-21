@@ -618,7 +618,7 @@
     "SharedArrayBuffer": {
       "additionalProperties": false,
       "properties": {
-        "__@species@474": {
+        "__@species@472": {
           "$ref": "#/definitions/SharedArrayBuffer"
         },
         "__@toStringTag@25": {
@@ -629,7 +629,7 @@
           "type": "number"
         }
       },
-      "required": ["__@species@474", "__@toStringTag@25", "byteLength"],
+      "required": ["__@species@472", "__@toStringTag@25", "byteLength"],
       "type": "object"
     },
     "ViewportSize": {
