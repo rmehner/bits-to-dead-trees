@@ -4,7 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi, Mock } from "vitest";
 import build, {
   defaultBrowserContextOptions,
   defaultGotoOptions,
-} from "../app";
+  // @ts-ignore
+} from "../app.js";
 const app = build();
 
 describe("GET /health", () => {

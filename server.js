@@ -17,8 +17,4 @@ const server = app({
   },
 });
 
-const startServer = async () => {
-  await server.listen({ port: +PORT, host: SERVER_ADDRESS });
-};
-
-startServer();
+await server.listen({ port: +PORT, host: SERVER_ADDRESS });

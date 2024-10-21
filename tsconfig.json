@@ -1,15 +1,3 @@
 {
-  "compilerOptions": {
-    "lib": ["es2023"],
-
-    "strict": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "module": "ESNext",
-
-    "checkJs": true
-  }
+  "extends": "@tsconfig/node20/tsconfig.json"
 }
