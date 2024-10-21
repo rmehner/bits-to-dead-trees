@@ -16,9 +16,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "check-format": "prettier --check '**/*.{js,ts,mjs,json,md}'",
+    "check-format": "prettier --check '**/*.{js,ts,cjs,mjs,json,md}'",
     "lint": "eslint *.js",
-    "format": "prettier --write '**/*.{js,ts,mjs,json,md}'",
+    "format": "prettier --write '**/*.{js,ts,cjs,mjs,json,md}'",
     "start": "node server.js",
     "start:dev": "nodemon --inspect server.js",
     "dump-schemas": "typescript-json-schema --noExtraProps --required --strictNullChecks types/schemas.ts PdfRequestBody --out pdf_request_body.json",
