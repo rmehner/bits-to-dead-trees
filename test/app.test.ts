@@ -52,7 +52,7 @@ describe("POST /pdf", () => {
     newPage = vi.fn().mockResolvedValue({ goto: gotoMethod, pdf });
     newContext = vi.fn().mockResolvedValue({ newPage });
 
-    (chromium.launch as Mock<any[], any>).mockResolvedValue({
+    (chromium.launch as Mock).mockResolvedValue({
       newContext,
       close,
     });
@@ -245,6 +245,9 @@ describe("POST /pdf", () => {
       },
     });
 
-    expect(pdf.mock.results[0].value).toBeLessThan(close.mock.results[0].value);
+    const callOrderForPdf = pdf.mock.invocationCallOrder[0];
+    const callOrderForClose = close.mock.invocationCallOrder[0];
+
+    expect(callOrderForPdf).toBeLessThan(callOrderForClose);
   });
 });
