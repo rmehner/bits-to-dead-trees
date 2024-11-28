@@ -49,6 +49,6 @@
     "pino-pretty": "^11.3.0",
     "prettier": "^3.3.3",
     "typescript-json-schema": "^0.65.1",
-    "vitest": "^2.1.5"
+    "vitest": "^2.1.6"
   }
 }
