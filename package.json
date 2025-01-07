@@ -23,7 +23,7 @@
     "start:dev": "nodemon --inspect server.js",
     "dump-schemas": "typescript-json-schema --noExtraProps --required --strictNullChecks types/schemas.ts PdfRequestBody --out pdf_request_body.json",
     "update-schemas": "npm run dump-schemas && npm run format",
-    "postinstall": "npx playwright-core install chromium",
+    "postinstall": "npx playwright-core install chromium --only-shell",
     "add-changeset": "changeset",
     "release": "changeset publish",
     "test": "vitest --reporter verbose",
