@@ -198,7 +198,7 @@
               "type": "null"
             }
           ],
-          "description": "Emulates `'prefers-colors-scheme'` media feature, supported values are `'light'`, `'dark'`, `'no-preference'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'light'`."
+          "description": "Emulates [prefers-colors-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)\nmedia feature, supported values are `'light'` and `'dark'`. See\n[page.emulateMedia([options])](https://playwright.dev/docs/api/class-page#page-emulate-media) for more details.\nPassing `null` resets emulation to system defaults. Defaults to `'light'`."
         },
         "deviceScaleFactor": {
           "description": "Specify device scale factor (can be thought of as dpr). Defaults to `1`. Learn more about\n[emulating devices with device scale factor](https://playwright.dev/docs/emulation#devices).",
