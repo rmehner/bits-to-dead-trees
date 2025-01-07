@@ -57,7 +57,7 @@ If you want to use it internally with docker-compose, this should give you a goo
 ```yml
 services:
   pdf:
-    image: ghcr.io/rmehner/bits-to-dead-trees:v2.19.2
+    image: ghcr.io/rmehner/bits-to-dead-trees:v2.20.0
     ports:
       - 8000:8000
 ```
