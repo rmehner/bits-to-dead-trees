@@ -1,5 +1,14 @@
 # bits-to-dead-trees
 
+## 2.20.0
+
+### Minor Changes
+
+- [#441](https://github.com/rmehner/bits-to-dead-trees/pull/441) [`b44b6a8`](https://github.com/rmehner/bits-to-dead-trees/commit/b44b6a80c99c3c5c9c3003d95f14d6e8102dd654) Thanks [@depfu](https://github.com/apps/depfu)! - Upgrade to Playwright 1.49.1.
+
+  This will switch to the new headless mode, see https://github.com/microsoft/playwright/issues/33566
+  for some details on that.
+
 ## 2.19.2
 
 ### Patch Changes
