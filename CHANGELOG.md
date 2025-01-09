@@ -1,5 +1,15 @@
 # bits-to-dead-trees
 
+## 2.21.0
+
+### Minor Changes
+
+- [#455](https://github.com/rmehner/bits-to-dead-trees/pull/455) [`ee7af32`](https://github.com/rmehner/bits-to-dead-trees/commit/ee7af32753f14a62f460631178f68992c28f8d6d) Thanks [@rmehner](https://github.com/rmehner)! - Removes tini from the Docker dependencies.
+
+  This reduces the image size by one layer and one dependency by handling the signals
+  ourselves. Fastify supports graceful shutdown, so it's pretty straightforward and
+  one thing less to keep in mind.
+
 ## 2.20.0
 
 ### Minor Changes
