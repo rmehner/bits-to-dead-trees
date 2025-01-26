@@ -6,7 +6,7 @@ on:
       - "depfu/update/npm/playwright-core-**"
 
 jobs:
-  run-prettier:
+  sync-dockerfile:
     runs-on: ubuntu-latest
     permissions:
       contents: write
