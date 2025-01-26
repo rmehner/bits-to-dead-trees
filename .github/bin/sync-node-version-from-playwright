@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o nounset
+
+PATH_TO_SCRIPT=$(dirname $(realpath $0))
+
+cd "${PATH_TO_SCRIPT}/../.." || exit 1
+
+PLAYWRIGHT_VERSION=$(cat package-lock.json | jq -r '.dependencies."playwright-core".version')
+docker run -it mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION} sh -c "node -v  | sed 's/^v//'" > .node-version
