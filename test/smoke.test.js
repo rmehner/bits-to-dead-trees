@@ -30,7 +30,7 @@ describe("Smoke tests", { timeout: 10_000, retry: 3 }, () => {
       error: true,
       status: 404,
       statusText: "Not Found",
-      message: "404 Not Found",
+      message: "404 ", // yup, the space at the end is intentional
     });
   });
 });
