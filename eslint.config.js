@@ -5,7 +5,7 @@ import pluginJs from "@eslint/js";
 import pluginPromise from "eslint-plugin-promise";
 import nodePlugin from "eslint-plugin-n";
 // @ts-ignore
-import eslintConfigPrettier from "eslint-config-prettier";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default [
   {
