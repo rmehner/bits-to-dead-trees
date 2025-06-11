@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "fastify": "^5.3.3",
-    "playwright-core": "^1.52.0"
+    "playwright-core": "^1.53.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
