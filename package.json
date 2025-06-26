@@ -38,7 +38,7 @@
     "@changesets/cli": "^2.29.5",
     "@eslint/js": "^9.29.0",
     "@tsconfig/node20": "^20.1.6",
-    "@types/lodash": "^4.17.18",
+    "@types/lodash": "^4.17.19",
     "@types/node": "22.10.7",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
