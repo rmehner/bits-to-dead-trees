@@ -1,14 +1,51 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeAll, afterAll } from "vitest";
+import { createServer } from "node:http";
 
 import build from "../app";
 const app = build();
 
+const startServer = async () => {
+  const server = createServer((req, res) => {
+    if (req.url.endsWith("success")) {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(`
+        <!DOCTYPE html>
+        <html>
+          <body>
+            <h1>All local servers are beautiful</h1>
+          </body>
+        </html>
+      `);
+    } else {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Not Found");
+    }
+  });
+
+  await new Promise((resolve) => {
+    server.listen(0, "127.0.0.1", resolve);
+  });
+  return server;
+};
+
 describe("Smoke tests", { timeout: 10_000, retry: 3 }, () => {
+  let server;
+  let baseUrl = "";
+
+  beforeAll(async () => {
+    server = await startServer();
+    baseUrl = `http://127.0.0.1:${server.address().port}`;
+  });
+
+  afterAll(() => {
+    server?.close();
+  });
+
   it("sends the PDF on the success case", async () => {
     const response = await app.inject({
       method: "POST",
       url: "/pdf",
-      payload: { url: "https://coding-robin.de" },
+      payload: { url: `${baseUrl}/success` },
     });
 
     expect(response.payload.startsWith("%PDF")).toBeTruthy();
@@ -19,7 +56,7 @@ describe("Smoke tests", { timeout: 10_000, retry: 3 }, () => {
       method: "POST",
       url: "/pdf",
       payload: {
-        url: "https://httpstat.us/404",
+        url: `${baseUrl}/404`,
       },
     });
 
