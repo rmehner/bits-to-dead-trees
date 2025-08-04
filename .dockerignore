@@ -5,5 +5,4 @@ test
 .eslintrc.json
 .prettierrc.json
 .node-version
-nodemon.json
 tsconfig.json
