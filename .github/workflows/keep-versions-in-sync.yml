@@ -1,12 +1,13 @@
-name: Keep dockerfile in sync
+name: Keep node version and playwright version in sync
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "depfu/update/npm/playwright-core-**"
 
 jobs:
-  sync-dockerfile:
+  sync-node-version:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,7 +17,15 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Update Dockerfile
+      - name: Sync .node-version with the one that Playwright is using
+        run: .github/bin/sync-node-version-from-playwright
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 Update .node-version after playwright update"
+
+      - name: Sync Playwright version in dockerfile with the one from package.json
         run: .github/bin/sync-playwright-version-to-dockerfile
 
       - name: Commit changes
