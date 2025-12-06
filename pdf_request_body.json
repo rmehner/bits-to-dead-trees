@@ -5,14 +5,14 @@
     "ArrayBuffer": {
       "additionalProperties": false,
       "properties": {
-        "__@toStringTag@25": {
+        "__@toStringTag@23": {
           "type": "string"
         },
         "byteLength": {
           "type": "number"
         }
       },
-      "required": ["__@toStringTag@25", "byteLength"],
+      "required": ["__@toStringTag@23", "byteLength"],
       "type": "object"
     },
     "ArrayBufferLike": {
@@ -57,7 +57,7 @@
                   "BYTES_PER_ELEMENT": {
                     "type": "number"
                   },
-                  "__@toStringTag@25": {
+                  "__@toStringTag@23": {
                     "const": "Uint8Array",
                     "type": "string"
                   },
@@ -76,7 +76,7 @@
                 },
                 "required": [
                   "BYTES_PER_ELEMENT",
-                  "__@toStringTag@25",
+                  "__@toStringTag@23",
                   "buffer",
                   "byteLength",
                   "byteOffset",
@@ -100,7 +100,7 @@
                   "BYTES_PER_ELEMENT": {
                     "type": "number"
                   },
-                  "__@toStringTag@25": {
+                  "__@toStringTag@23": {
                     "const": "Uint8Array",
                     "type": "string"
                   },
@@ -119,7 +119,7 @@
                 },
                 "required": [
                   "BYTES_PER_ELEMENT",
-                  "__@toStringTag@25",
+                  "__@toStringTag@23",
                   "buffer",
                   "byteLength",
                   "byteOffset",
@@ -151,7 +151,7 @@
                   "BYTES_PER_ELEMENT": {
                     "type": "number"
                   },
-                  "__@toStringTag@25": {
+                  "__@toStringTag@23": {
                     "const": "Uint8Array",
                     "type": "string"
                   },
@@ -170,7 +170,7 @@
                 },
                 "required": [
                   "BYTES_PER_ELEMENT",
-                  "__@toStringTag@25",
+                  "__@toStringTag@23",
                   "buffer",
                   "byteLength",
                   "byteOffset",
@@ -630,10 +630,10 @@
     "SharedArrayBuffer": {
       "additionalProperties": false,
       "properties": {
-        "__@species@472": {
+        "__@species@469": {
           "$ref": "#/definitions/SharedArrayBuffer"
         },
-        "__@toStringTag@25": {
+        "__@toStringTag@23": {
           "const": "SharedArrayBuffer",
           "type": "string"
         },
@@ -641,7 +641,7 @@
           "type": "number"
         }
       },
-      "required": ["__@species@472", "__@toStringTag@25", "byteLength"],
+      "required": ["__@species@469", "__@toStringTag@23", "byteLength"],
       "type": "object"
     },
     "ViewportSize": {
