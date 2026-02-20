@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.58.0
+FROM mcr.microsoft.com/playwright:v1.58.2
 
 ENV NODE_ENV=production
 ENV PORT=8000
