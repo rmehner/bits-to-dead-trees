@@ -343,8 +343,35 @@
           "description": "Enables video recording for all pages into `recordVideo.dir` directory. If not specified videos are not recorded.\nMake sure to await\n[browserContext.close([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-close) for\nvideos to be saved.",
           "properties": {
             "dir": {
-              "description": "Path to the directory to put videos into.",
+              "description": "Path to the directory to put videos into. If not specified, the videos will be stored in `artifactsDir` (see\n[browserType.launch([options])](https://playwright.dev/docs/api/class-browsertype#browser-type-launch) options).",
               "type": "string"
+            },
+            "showActions": {
+              "additionalProperties": false,
+              "description": "If specified, enables visual annotations on interacted elements during video recording.",
+              "properties": {
+                "duration": {
+                  "description": "How long each annotation is displayed in milliseconds. Defaults to `500`.",
+                  "type": "number"
+                },
+                "fontSize": {
+                  "description": "Font size of the action title in pixels. Defaults to `24`.",
+                  "type": "number"
+                },
+                "position": {
+                  "description": "Position of the action title overlay. Defaults to `\"top-right\"`.",
+                  "enum": [
+                    "bottom",
+                    "bottom-left",
+                    "bottom-right",
+                    "top",
+                    "top-left",
+                    "top-right"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
             },
             "size": {
               "additionalProperties": false,
@@ -363,7 +390,6 @@
               "type": "object"
             }
           },
-          "required": ["dir"],
           "type": "object"
         },
         "reducedMotion": {
