@@ -531,24 +531,6 @@
           "description": "Specific user agent to use in this context.",
           "type": "string"
         },
-        "videoSize": {
-          "additionalProperties": false,
-          "properties": {
-            "height": {
-              "description": "Video frame height.",
-              "type": "number"
-            },
-            "width": {
-              "description": "Video frame width.",
-              "type": "number"
-            }
-          },
-          "required": ["height", "width"],
-          "type": "object"
-        },
-        "videosPath": {
-          "type": "string"
-        },
         "viewport": {
           "anyOf": [
             {
