@@ -2,29 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
-    "ArrayBuffer": {
-      "additionalProperties": false,
-      "properties": {
-        "__@toStringTag@23": {
-          "type": "string"
-        },
-        "byteLength": {
-          "type": "number"
-        }
-      },
-      "required": ["__@toStringTag@23", "byteLength"],
-      "type": "object"
-    },
-    "ArrayBufferLike": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/ArrayBuffer"
-        },
-        {
-          "$ref": "#/definitions/SharedArrayBuffer"
-        }
-      ]
-    },
     "BrowserContextOptions": {
       "additionalProperties": false,
       "properties": {
@@ -46,86 +23,22 @@
             "additionalProperties": false,
             "properties": {
               "cert": {
-                "additionalProperties": false,
                 "description": "Direct value of the certificate in PEM format.",
-                "patternProperties": {
-                  "^[0-9]+$": {
-                    "type": "number"
-                  }
+                "items": {
+                  "type": "number"
                 },
-                "properties": {
-                  "BYTES_PER_ELEMENT": {
-                    "type": "number"
-                  },
-                  "__@toStringTag@23": {
-                    "const": "Uint8Array",
-                    "type": "string"
-                  },
-                  "buffer": {
-                    "$ref": "#/definitions/ArrayBufferLike"
-                  },
-                  "byteLength": {
-                    "type": "number"
-                  },
-                  "byteOffset": {
-                    "type": "number"
-                  },
-                  "length": {
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "BYTES_PER_ELEMENT",
-                  "__@toStringTag@23",
-                  "buffer",
-                  "byteLength",
-                  "byteOffset",
-                  "length"
-                ],
-                "type": "object"
+                "type": "array"
               },
               "certPath": {
                 "description": "Path to the file with the certificate in PEM format.",
                 "type": "string"
               },
               "key": {
-                "additionalProperties": false,
                 "description": "Direct value of the private key in PEM format.",
-                "patternProperties": {
-                  "^[0-9]+$": {
-                    "type": "number"
-                  }
+                "items": {
+                  "type": "number"
                 },
-                "properties": {
-                  "BYTES_PER_ELEMENT": {
-                    "type": "number"
-                  },
-                  "__@toStringTag@23": {
-                    "const": "Uint8Array",
-                    "type": "string"
-                  },
-                  "buffer": {
-                    "$ref": "#/definitions/ArrayBufferLike"
-                  },
-                  "byteLength": {
-                    "type": "number"
-                  },
-                  "byteOffset": {
-                    "type": "number"
-                  },
-                  "length": {
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "BYTES_PER_ELEMENT",
-                  "__@toStringTag@23",
-                  "buffer",
-                  "byteLength",
-                  "byteOffset",
-                  "length"
-                ],
-                "type": "object"
+                "type": "array"
               },
               "keyPath": {
                 "description": "Path to the file with the private key in PEM format.",
@@ -140,43 +53,11 @@
                 "type": "string"
               },
               "pfx": {
-                "additionalProperties": false,
                 "description": "Direct value of the PFX or PKCS12 encoded private key and certificate chain.",
-                "patternProperties": {
-                  "^[0-9]+$": {
-                    "type": "number"
-                  }
+                "items": {
+                  "type": "number"
                 },
-                "properties": {
-                  "BYTES_PER_ELEMENT": {
-                    "type": "number"
-                  },
-                  "__@toStringTag@23": {
-                    "const": "Uint8Array",
-                    "type": "string"
-                  },
-                  "buffer": {
-                    "$ref": "#/definitions/ArrayBufferLike"
-                  },
-                  "byteLength": {
-                    "type": "number"
-                  },
-                  "byteOffset": {
-                    "type": "number"
-                  },
-                  "length": {
-                    "type": "number"
-                  }
-                },
-                "required": [
-                  "BYTES_PER_ELEMENT",
-                  "__@toStringTag@23",
-                  "buffer",
-                  "byteLength",
-                  "byteOffset",
-                  "length"
-                ],
-                "type": "object"
+                "type": "array"
               },
               "pfxPath": {
                 "description": "Path to the PFX or PKCS12 encoded private key and certificate chain.",
@@ -633,23 +514,6 @@
         "sticky",
         "unicode"
       ],
-      "type": "object"
-    },
-    "SharedArrayBuffer": {
-      "additionalProperties": false,
-      "properties": {
-        "__@species@469": {
-          "$ref": "#/definitions/SharedArrayBuffer"
-        },
-        "__@toStringTag@23": {
-          "const": "SharedArrayBuffer",
-          "type": "string"
-        },
-        "byteLength": {
-          "type": "number"
-        }
-      },
-      "required": ["__@species@469", "__@toStringTag@23", "byteLength"],
       "type": "object"
     },
     "ViewportSize": {
