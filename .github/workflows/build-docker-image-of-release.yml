@@ -71,7 +71,7 @@ jobs:
 
       - name: Update version in README
         run: |
-          sed -i 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${TAG_NAME}|' README.md
+          sed -i "s|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${TAG_NAME}|" README.md
 
       - name: Create Pull Request
         env:
