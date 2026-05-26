@@ -10,36 +10,57 @@ on:
         required: true
         type: string
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
+    name: Build and push Docker image
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      packages: write
-      pull-requests: write
+      contents: write # Required to commit README updates and push the PR branch.
+      packages: write # Required to publish the image to GitHub Container Registry.
+      pull-requests: write # Required to open or update the README pull request.
     steps:
       - name: Set tag name
-        run: echo "TAG_NAME=${{ inputs.ref_name || github.ref_name }}" >> $GITHUB_ENV
+        env:
+          INPUT_REF_NAME: ${{ inputs.ref_name }}
+          RELEASE_REF_NAME: ${{ github.ref_name }}
+        run: |
+          tag_name="${INPUT_REF_NAME:-${RELEASE_REF_NAME}}"
+          if [ -z "${tag_name}" ]; then
+            echo "Unable to determine tag name" >&2
+            exit 1
+          fi
+
+          if [[ "${tag_name}" == *$'\n'* ]] || [[ "${tag_name}" == *$'\r'* ]]; then
+            echo "Tag name must not contain newlines" >&2
+            exit 1
+          fi
+
+          echo "TAG_NAME=${tag_name}" >> "${GITHUB_ENV}"
+
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ env.TAG_NAME }}
           persist-credentials: false
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
 
       - name: Build and push builder image
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7
         with:
           file: Dockerfile
           push: true
@@ -53,11 +74,28 @@ jobs:
           sed -i 's|image: ghcr.io/rmehner/bits-to-dead-trees:v.*|image: ghcr.io/rmehner/bits-to-dead-trees:${TAG_NAME}|' README.md
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          sign-commits: true
-          commit-message: "🤖 Update version of docker image in README to ${{ env.TAG_NAME }}"
-          title: "🤖 Update version in README after release"
-          base: main
-          body: |
-            Updates the referenced docker image version in the README to ${{ env.TAG_NAME }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ env.TAG_NAME }}
+        run: |
+          if [ -z "$(git status --porcelain README.md)" ]; then
+            exit 0
+          fi
+
+          branch_tag="${TAG_NAME//[^A-Za-z0-9._-]/-}"
+          branch_name="update-docker-image-${branch_tag}"
+          title="🤖 Update version in README after release"
+          body="Updates the referenced docker image version in the README to ${TAG_NAME}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "${branch_name}"
+          git add README.md
+          git commit -m "🤖 Update version of docker image in README to ${TAG_NAME}"
+          git push --force-with-lease "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${branch_name}"
+
+          if gh pr view "${branch_name}" --json number --jq .number >/dev/null 2>&1; then
+            gh pr edit "${branch_name}" --title "${title}" --body "${body}"
+          else
+            gh pr create --base main --head "${branch_name}" --title "${title}" --body "${body}"
+          fi
