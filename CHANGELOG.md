@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.31.1
+
+### Patch Changes
+
+- [#654](https://github.com/rmehner/bits-to-dead-trees/pull/654) [`759a948`](https://github.com/rmehner/bits-to-dead-trees/commit/759a948c4e4980d2c6967e518f90646dc5dab59f) Thanks [@dependabot](https://github.com/apps/dependabot)! - Update docker to use playwright 1.60.0 as well
+
 ## 2.31.0
 
 ### Minor Changes
