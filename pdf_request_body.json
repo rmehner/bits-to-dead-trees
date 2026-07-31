@@ -2,6 +2,28 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
+    "AbortSignal": {
+      "additionalProperties": false,
+      "properties": {
+        "aborted": {
+          "type": "boolean"
+        },
+        "onabort": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {}
+      },
+      "required": ["aborted", "onabort", "reason"],
+      "type": "object"
+    },
     "BrowserContextOptions": {
       "additionalProperties": false,
       "properties": {
@@ -231,6 +253,11 @@
               "additionalProperties": false,
               "description": "If specified, enables visual annotations on interacted elements during video recording.",
               "properties": {
+                "cursor": {
+                  "description": "Cursor decoration shown for pointer actions. `\"pointer\"` (the default) renders a mouse pointer that animates from\nthe previous action point to the next one. `\"none\"` disables the cursor decoration.",
+                  "enum": ["none", "pointer"],
+                  "type": "string"
+                },
                 "duration": {
                   "description": "How long each annotation is displayed in milliseconds. Defaults to `500`.",
                   "type": "number"
@@ -551,6 +578,10 @@
             "referer": {
               "description": "Referer header value. If provided it will take preference over the referer header value set by\n[page.setExtraHTTPHeaders(headers)](https://playwright.dev/docs/api/class-page#page-set-extra-http-headers).",
               "type": "string"
+            },
+            "signal": {
+              "$ref": "#/definitions/AbortSignal",
+              "description": "Allows to cancel the operation using an\n[`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal). If the signal is aborted, the\noperation will be aborted and throw an error. Note that providing a signal does not disable the default timeout,\nwhich can be changed using\n[browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout)\nor [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout); pass\n`timeout: 0` to disable the timeout entirely."
             },
             "timeout": {
               "description": "Maximum operation time in milliseconds. Defaults to `0` - no timeout. The default value can be changed via\n`navigationTimeout` option in the config, or by using the\n[browserContext.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-navigation-timeout),\n[browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout),\n[page.setDefaultNavigationTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-navigation-timeout)\nor [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.",
