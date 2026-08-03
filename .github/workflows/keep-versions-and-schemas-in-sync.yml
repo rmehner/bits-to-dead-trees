@@ -1,4 +1,4 @@
-name: Keep node version and playwright version in sync
+name: Keep node version, playwright version & schema in sync
 
 on:
   workflow_dispatch:
@@ -17,13 +17,18 @@ jobs:
     name: Keep versions in sync
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Required to commit version sync updates back to the current branch.
+      contents: write # Required to commit version & schema sync updates back to the current branch.
     steps:
       - name: Checkout Repo
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ github.head_ref }}
           persist-credentials: false
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Sync .node-version with the one that Playwright is using
         run: .github/bin/sync-node-version-from-playwright
@@ -36,11 +41,8 @@ jobs:
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "🤖 Update .node-version after playwright update"
-          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
 
       - name: Sync Playwright version in dockerfile with the one from package.json
         run: .github/bin/sync-playwright-version-to-dockerfile
@@ -53,8 +55,32 @@ jobs:
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "🤖 Update playwright-core in Dockerfile after depfu update"
+
+      - name: Set up Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Update schemas
+        run: npm run update-schemas
+
+      - name: Commit schema changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 0
+          fi
+
+          git add .
+          git commit -m "🤖 Update schema to match Playwright version"
+
+      - name: Push changes
+        run: |
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
