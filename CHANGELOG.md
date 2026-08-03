@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.33.0
+
+### Minor Changes
+
+- [#692](https://github.com/rmehner/bits-to-dead-trees/pull/692) [`50e2f44`](https://github.com/rmehner/bits-to-dead-trees/commit/50e2f4494711a3f72294357c2aa183a018e60a6e) Thanks [@depfu](https://github.com/apps/depfu)! - Upgrade to Playwright 1.62.1
+
 ## 2.32.1
 
 ### Patch Changes
