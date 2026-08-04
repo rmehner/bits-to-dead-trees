@@ -6,9 +6,9 @@ ENV SERVER_ADDRESS=0.0.0.0
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["package.json", "package-lock.json", "./"]
 
-RUN npm install --omit=dev --ignore-scripts
+RUN npm ci --omit=dev --ignore-scripts
 
 COPY ["server.js", "app.js", "pdf_request_body.json", "./"]
 
