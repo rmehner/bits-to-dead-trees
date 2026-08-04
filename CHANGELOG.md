@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.33.1
+
+### Patch Changes
+
+- [`0655505`](https://github.com/rmehner/bits-to-dead-trees/commit/06555054682f7e148b2dc3ed6667078ff56081c0) Thanks [@rmehner](https://github.com/rmehner)! - Harden & Stabilize Dockerfile by using npm ci
+
 ## 2.33.0
 
 ### Minor Changes
