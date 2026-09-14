@@ -146,8 +146,18 @@
           "type": "boolean"
         },
         "httpCredentials": {
-          "$ref": "#/definitions/HTTPCredentials",
-          "description": "Credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication). If no\norigin is specified, the username and password are sent to any servers upon unauthorized responses."
+          "anyOf": [
+            {
+              "$ref": "#/definitions/HTTPCredentials"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/HTTPCredentials"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Credentials for [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication). If no\norigin is specified, the username and password are sent to any servers upon unauthorized responses.\n\nPass an array to use different credentials for different origins. The first entry that matches the request origin\nis used, and entries with no origin match any request."
         },
         "ignoreHTTPSErrors": {
           "description": "Whether to ignore HTTPS errors when sending network requests. Defaults to `false`.",
