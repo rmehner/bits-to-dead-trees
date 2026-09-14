@@ -34,8 +34,6 @@ jobs:
         run: .github/bin/sync-node-version-from-playwright
 
       - name: Commit .node-version changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             exit 0
@@ -48,8 +46,6 @@ jobs:
         run: .github/bin/sync-playwright-version-to-dockerfile
 
       - name: Commit Dockerfile changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             exit 0
@@ -71,8 +67,6 @@ jobs:
         run: npm run update-schemas
 
       - name: Commit schema changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             exit 0
@@ -82,5 +76,7 @@ jobs:
           git commit -m "🤖 Update schema to match Playwright version"
 
       - name: Push changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
