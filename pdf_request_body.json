@@ -164,7 +164,7 @@
           "type": "boolean"
         },
         "isMobile": {
-          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,\nso you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more\nabout [mobile emulation](https://playwright.dev/docs/emulation#ismobile).",
+          "description": "Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,\nso you don't actually need to set it manually. Defaults to `false`. Learn more about\n[mobile emulation](https://playwright.dev/docs/emulation#ismobile).",
           "type": "boolean"
         },
         "javaScriptEnabled": {
@@ -259,6 +259,10 @@
               "description": "Path to the directory to put videos into. If not specified, the videos will be stored in `artifactsDir` (see\n[browserType.launch([options])](https://playwright.dev/docs/api/class-browsertype#browser-type-launch) options).",
               "type": "string"
             },
+            "fps": {
+              "description": "Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up\nto 25 frames per second.",
+              "type": "number"
+            },
             "showActions": {
               "additionalProperties": false,
               "description": "If specified, enables visual annotations on interacted elements during video recording.",
@@ -273,7 +277,7 @@
                   "type": "number"
                 },
                 "fontSize": {
-                  "description": "Font size of the action title in pixels. Defaults to `24`.",
+                  "description": "Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.",
                   "type": "number"
                 },
                 "position": {
@@ -287,6 +291,25 @@
                     "top-right"
                   ],
                   "type": "string"
+                },
+                "style": {
+                  "additionalProperties": false,
+                  "description": "Styles of the action decorations.",
+                  "properties": {
+                    "highlight": {
+                      "description": "CSS declarations for the box that covers the target element. Not shown when omitted.",
+                      "type": "string"
+                    },
+                    "point": {
+                      "description": "CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.",
+                      "type": "string"
+                    },
+                    "title": {
+                      "description": "CSS declarations for the action title.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
                 }
               },
               "type": "object"
