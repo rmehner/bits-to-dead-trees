@@ -1,5 +1,11 @@
 # bits-to-dead-trees
 
+## 2.35.2
+
+### Patch Changes
+
+- [`ead6315`](https://github.com/rmehner/bits-to-dead-trees/commit/ead6315369931dbb73d06104aa0b02b495df45ed) Thanks [@rmehner](https://github.com/rmehner)! - Various dependency bumps for security
+
 ## 2.35.1
 
 ### Patch Changes

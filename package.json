@@ -1,7 +1,7 @@
 {
   "name": "bits-to-dead-trees",
   "author": "Robin Mehner <robin@coding-robin.de>",
-  "version": "2.35.1",
+  "version": "2.35.2",
   "description": "Turn HTML into PDF files",
   "repository": {
     "type": "git",
