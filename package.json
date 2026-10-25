@@ -41,16 +41,16 @@
     "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
     "@tsconfig/node24": "^24.0.5",
-    "@types/lodash": "^4.17.26",
+    "@types/lodash": "^4.17.27",
     "@types/node": "24.19.2",
     "eslint": "^10.13.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-n": "^18.4.1",
+    "eslint-plugin-n": "^18.5.0",
     "eslint-plugin-promise": "^7.3.0",
     "globals": "^17.13.0",
     "pino-pretty": "^13.2.0",
     "prettier": "^3.9.10",
     "typescript-json-schema": "^0.68.0",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.5"
   }
 }
